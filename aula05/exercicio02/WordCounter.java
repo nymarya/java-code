@@ -13,7 +13,7 @@ public class WordCounter{
     private Map<String, Integer> words;
     
     /**
-     * 
+     * Cria um novo contador de palavras
      */
     public WordCounter(InputStream input) throws IOException{
         words = new HashMap<String, Integer>();
