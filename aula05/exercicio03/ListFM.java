@@ -26,7 +26,7 @@ public class ListFM{
     }
 
     /**
-     * Return number of String of the list.
+     * Return number of String in the list.
      * @return The size of the list.
      */
     public int getNumberOfFiles(){
@@ -42,7 +42,7 @@ public class ListFM{
         if( index >= 0 && index < playlist.size() ){
             playlist.remove(index);
         } else {
-            System.out.println("[Error] Index " + index + " is out of range");
+            System.out.println("[removeFile()] Index " + index + " is out of range");
         }
     }
 
@@ -59,23 +59,7 @@ public class ListFM{
             System.out.println("Now playing: " + filename);
             engine.playCompletely( filename );
         } else {
-            System.out.println("[Error] File '" +file+ "' not found ");
-        }
-    }
-
-    /**
-     * Play full audio at the position 'index'.
-     * @param index Position of the audio to be played.
-     */
-    public void playTrack( int index ){
-        //Check if index is not out of range
-        if( index >= 0 && index < playlist.size() ){
-            String file = playlist.get( index );
-
-            System.out.println("Now playing: " + file);
-            engine.playCompletely(file);
-        } else {
-            System.out.println("[Error] Index out of range: " + index);
+            System.out.println("[playFile()] File '" +file+ "' not found ");
         }
     }
 
@@ -90,7 +74,7 @@ public class ListFM{
     }
 
     /**
-     * Print all files from the playlist.
+     * Print all files of the playlist.
      */
     public void listFiles(){
         for( String file : playlist){
@@ -100,7 +84,7 @@ public class ListFM{
     }
 
     /**
-     * Remove the first filename that contains 'file'.
+     * Remove the first element that contains the string 'file'.
      * @param file
      */
     public void removeFile(String file){
@@ -113,7 +97,7 @@ public class ListFM{
                 return;
             }
         }
-        System.out.println("[Error] There is no result for " + file);
+        System.out.println("[removeFile()] There is no result for '" + file+"' ");
         
     }
 
