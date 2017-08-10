@@ -19,7 +19,7 @@ public class ListFM{
     
     /**
      * Add file to the list.
-     * @param filename The file to be saved.
+     * @param file The file to be saved.
      */
     public void addFile(String file){
         playlist.add(file);
@@ -38,11 +38,11 @@ public class ListFM{
      * @param index Position of the target object.
      */
     public void removeFile( int index){
-        //Check if index is not out of range
+        //Check if index is out of range
         if( index >= 0 && index < playlist.size() ){
             playlist.remove(index);
         } else {
-            System.out.println("[Error] Index out of range");
+            System.out.println("[Error] Index " + index + " is out of range");
         }
     }
 
@@ -65,7 +65,7 @@ public class ListFM{
 
     /**
      * Play full audio at the position 'index'.
-     * @param filename File to be played.
+     * @param index Position of the audio to be played.
      */
     public void playTrack( int index ){
         //Check if index is not out of range
@@ -100,7 +100,8 @@ public class ListFM{
     }
 
     /**
-     * 
+     * Remove the first filename that contains 'file'.
+     * @param file
      */
     public void removeFile(String file){
         //Check if file is in the list
