@@ -34,6 +34,16 @@ public class ListFM{
     }
 
     /**
+     * Print all files of the playlist.
+     */
+    public void listFiles(){
+        for( String file : playlist){
+            int index = playlist.indexOf( file );
+            System.out.println( index + ": " + file);
+        }
+    }
+
+    /**
      * Remove file at position 'index'.
      * @param index Position of the target object.
      */
@@ -70,16 +80,6 @@ public class ListFM{
         for( String file : playlist){
             System.out.println("Now playing: " + file);
             engine.playCompletely(file);
-        }
-    }
-
-    /**
-     * Print all files of the playlist.
-     */
-    public void listFiles(){
-        for( String file : playlist){
-            int index = playlist.indexOf( file );
-            System.out.println( index + ": " + file);
         }
     }
 

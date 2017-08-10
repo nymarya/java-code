@@ -13,7 +13,7 @@ public class Main{
         playlist.listFiles();
     
         //Teste playFile()
-        playlist.playFile("audio/Gunther-DingDingDongSong.mp3");
+        playlist.playFile("audio/BoB-Airplane.mp3");
 
         //Teste removeFile()
         playlist.removeFile(3);
