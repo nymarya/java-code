@@ -50,16 +50,16 @@ public class ListFM{
      * Play full audio.
      * @param filename File to be played.
      */
-    public void playFile( String filename ){
+    public void playFile( String file ){
         //Check if audio is in the playlist
-        int index = playlist.indexOf(filename);
+        int index = playlist.indexOf(file);
         if( index != -1){
-            String file = playlist.get( index );
+            String filename = playlist.get( index );
 
-            System.out.println("Now playing: " + file);
-            engine.playCompletely( file );
+            System.out.println("Now playing: " + filename);
+            engine.playCompletely( filename );
         } else {
-            System.out.println("[Error] File not found");
+            System.out.println("[Error] File '" +file+ "' not found ");
         }
     }
 
@@ -75,7 +75,7 @@ public class ListFM{
             System.out.println("Now playing: " + file);
             engine.playCompletely(file);
         } else {
-            System.out.println("[Error] Index out of range");
+            System.out.println("[Error] Index out of range: " + index);
         }
     }
 
@@ -93,22 +93,27 @@ public class ListFM{
      * Print all files from the playlist.
      */
     public void listFiles(){
-        Iterator<String> it = playlist.iterator();
-        while( it.hasNext()){
-            String file = it.next();
+        for( String file : playlist){
             int index = playlist.indexOf( file );
             System.out.println( index + ": " + file);
         }
     }
 
-    void removeFile(String file){
+    /**
+     * 
+     */
+    public void removeFile(String file){
         //Check if file is in the list
-        int index = playlist.indexOf(file);
-        if( index != -1 ){
-            playlist.remove( index );
-        } else {
-            System.out.println("[Error] File not found");
+        Iterator<String> it = playlist.iterator();
+        while( it.hasNext() ){
+            String filename = it.next();
+            if( filename.contains(file)){
+                playlist.remove(filename);
+                return;
+            }
         }
+        System.out.println("[Error] There is no result for " + file);
+        
     }
 
 }
