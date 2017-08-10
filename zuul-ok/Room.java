@@ -14,11 +14,13 @@
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    private Room upExit;
+    private Room downExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -30,6 +32,34 @@ public class Room
     {
         this.description = description;
     }
+    
+    /**
+     * Return exit to the direction.
+     * @param direction Direction to be verified.
+     * @return Room at the direction.
+     */
+    public Room getExit( String direction){
+        if(direction.equals("north")){
+            return northExit;
+        }
+        if( direction.equals("south")){
+            return southExit;
+        }
+        if( direction.equals("east") ){
+            return eastExit;
+        }
+        if( direction.equals("west") ){
+            return westExit;
+        }
+        if( direction.equals("up") ){
+            return upExit;
+        }
+        if( direction.equals("down") ){
+            return downExit;
+        }
+
+        return null;
+    }
 
     /**
      * Define the exits of this room.  Every direction either leads
@@ -39,7 +69,7 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west) 
+    public void setExits(Room north, Room east, Room south, Room west, Room up, Room down) 
     {
         if(north != null)
             northExit = north;
@@ -49,6 +79,8 @@ public class Room
             southExit = south;
         if(west != null)
             westExit = west;
+        upExit = up;
+        downExit = down;
     }
 
     /**
@@ -57,6 +89,34 @@ public class Room
     public String getDescription()
     {
         return description;
+    }
+
+    /**
+     * Return exit description.
+     * @return String that represents the direction that leads to the next room.
+     */
+    public String getExitString(){
+        String exit = "Exists: ";
+        if(northExit != null) {
+            exit += "north ";
+        }
+        if(eastExit != null) {
+            exit += "east ";
+        }
+        if(southExit != null) {
+            exit += "south ";
+        }
+        if(westExit != null) {
+            exit += "west ";
+        }
+        if(upExit != null) {
+            exit += "up ";
+        }
+        if(downExit != null) {
+            exit += "down ";
+        }
+
+        return exit;
     }
 
 }
