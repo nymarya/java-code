@@ -1,0 +1,9 @@
+mais opçoes no metodo goRoom() da classe Game.
+criar novas direçoes na classe Room.java
+atualizar metodo setExits
+
+Room: guarda as informações da sala (descricao e salas visinhas)
+CommandWords: valida palavra do comando
+Command: verificas se o comando é valido
+Parser: recupera comando a partir do terminal
+Game: controla salas
