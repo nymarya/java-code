@@ -33,7 +33,9 @@ public class BallDemo
 
         balls = new ArrayList<BouncingBall>();
 
-        colors = new ArrayList<>(Arrays.asList(Color.blue, Color.lightGray, Color.GRAY, Color.DARK_GRAY));
+        colors = new ArrayList<>(Arrays.asList(Color.blue, Color.lightGray, Color.gray, Color.darkGray, 
+            Color.black, Color.red, Color.pink, Color.orange, Color.yellow, Color.green, Color.magenta, 
+            Color.cyan));
     }
  
     /**
@@ -46,7 +48,7 @@ public class BallDemo
         int ground = (int) (0.8 * canvasDimension.height);   // position of the ground line
         int xStart = (int) (0.1 * canvasDimension.width);    // x-start of the ground line
         int xLimit = (int) (0.9 * canvasDimension.width);   // x-limit of the ground line
-        int yLimit = (int) ( 0.8 * canvasDimension.height );
+        int yLimit = (int) ( 0.2 * canvasDimension.height );
 
         myCanvas.setVisible(true);
 
@@ -54,13 +56,14 @@ public class BallDemo
         myCanvas.setForegroundColor(Color.blue);
         myCanvas.drawLine(xStart, ground, xLimit, ground);
 
+        int pos = xStart;
         // crate and show the balls
         if( number > 0){
             while( number-- > 0 ){
-                int yPos = 50;
-                int diameter = ThreadLocalRandom.current().nextInt(15, 66); 
+                int yPos = ThreadLocalRandom.current().nextInt(yLimit, ground-20);
+                int diameter = ThreadLocalRandom.current().nextInt(10, 56); 
                 int color = ThreadLocalRandom.current().nextInt(0, colors.size()); 
-                BouncingBall newBall = new BouncingBall(xStart+=diameter, yPos, diameter, colors.get(color), ground, myCanvas);
+                BouncingBall newBall = new BouncingBall(xStart, yPos, diameter, colors.get(color), ground, myCanvas);
                 yPos += 30;
                 balls.add( newBall);
             }
@@ -80,7 +83,7 @@ public class BallDemo
             for( BouncingBall ball : balls){
                 ball.move();
                 // stop once ball has travelled a certain distance on x axis
-                if(ball.getXPosition() >= xLimit) {
+                if(balls.indexOf(ball) == (balls.size()-1) && ball.getXPosition() >= xLimit) {
                     finished = true;
                 }
             }
