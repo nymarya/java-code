@@ -48,7 +48,8 @@ public class BallDemo
         int ground = (int) (0.8 * canvasDimension.height);   // position of the ground line
         int xStart = (int) (0.1 * canvasDimension.width);    // x-start of the ground line
         int xLimit = (int) (0.9 * canvasDimension.width);   // x-limit of the ground line
-        int yLimit = (int) ( 0.2 * canvasDimension.height );
+        int yLimit = (int) ( 0.1 * canvasDimension.height );
+        int yMin = (int) ( 0.4 * canvasDimension.height );
 
         myCanvas.setVisible(true);
 
@@ -60,7 +61,7 @@ public class BallDemo
         // crate and show the balls
         if( number > 0){
             while( number-- > 0 ){
-                int yPos = ThreadLocalRandom.current().nextInt(yLimit, ground-20);
+                int yPos = ThreadLocalRandom.current().nextInt(yLimit, yMin);
                 int diameter = ThreadLocalRandom.current().nextInt(10, 56); 
                 int color = ThreadLocalRandom.current().nextInt(0, colors.size()); 
                 BouncingBall newBall = new BouncingBall(xStart, yPos, diameter, colors.get(color), ground, myCanvas);
