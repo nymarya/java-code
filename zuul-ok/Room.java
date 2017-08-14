@@ -59,12 +59,20 @@ public class Room
     }
 
     /**
+     * Return a long description of the room.
+     * @return String that describes the roomm.
+     */
+    public String getLongDescription(){
+        return "You are " + description + ".\n " + getExitString();
+    }
+
+    /**
      * Return exit description.
-     * @return 
+     * @return String that contains all the directions available.
      */
     public String getExitString(){
         Set<String> exitsString = exits.keySet();
-        Strin exit = "";
+        String exit = "Exists: ";
         for( String e: exitsString){
             exit += e + " ";
         }
