@@ -45,12 +45,21 @@ public class Game
         observatory = new Room("in the observatory");
         
         // initialise room exits
-        outside.setExits(null, theatre, lab, pub, null, null);
-        theatre.setExits(null, null, null, outside, observatory, null);
-        pub.setExits(null, outside, null, null, null, null);
-        lab.setExits(outside, office, null, null, null, null);
-        office.setExits(null, null, null, lab, null, null);
-        observatory.setExits(null, null, null, null, null, theatre);
+        outside.setExit("east", theatre);
+        outside.setExit("south", lab);
+        outside.setExit("west", pub);
+        
+        theatre.setExit("west", outside);
+        theatre.setExit("up", observatory);
+        
+        pub.setExit("east", outside);
+        
+        lab.setExit("north", outside);
+        lab.setExit("east", office);
+        
+        office.setExit("west", lab);
+        
+        observatory.setExit("down", theatre);
 
         currentRoom = outside;  // start game outside
     }
@@ -156,10 +165,11 @@ public class Game
     }
 
     /**
-     * Print location to the user.
+     * Print details about location.
      */
     public void printLocationInfo(){
         System.out.println("You are " + currentRoom.getDescription());
+        String exit = "Exists: ";
         String exit = currentRoom.getExitString();
         System.out.println(exit);
     }

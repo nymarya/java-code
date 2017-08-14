@@ -12,15 +12,14 @@
  * @author  Michael Kolling and David J. Barnes
  * @version 2008.03.30
  */
+
+import java.util.HashMap;
+import java.util.Set;
+
 public class Room 
 {
     private String description;
-    private Room northExit;
-    private Room southExit;
-    private Room eastExit;
-    private Room westExit;
-    private Room upExit;
-    private Room downExit;
+    private HashMap<String, Room> exits;
 
     /**
      * Create a room described "description". Initially, it has
@@ -31,56 +30,24 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
+        exits = new HashMap<String, Room>();
     }
     
     /**
-     * Return exit to the direction.
-     * @param direction Direction to be verified.
-     * @return Room at the direction.
+     * 
      */
     public Room getExit( String direction){
-        if(direction.equals("north")){
-            return northExit;
-        }
-        if( direction.equals("south")){
-            return southExit;
-        }
-        if( direction.equals("east") ){
-            return eastExit;
-        }
-        if( direction.equals("west") ){
-            return westExit;
-        }
-        if( direction.equals("up") ){
-            return upExit;
-        }
-        if( direction.equals("down") ){
-            return downExit;
-        }
-
-        return null;
+        return exits.get(direction);
     }
-
+    
     /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
+     * Define an exit of this room.
+     * @param direction Direction that lead to next room.
+     * @param neighbor Room that
      */
-    public void setExits(Room north, Room east, Room south, Room west, Room up, Room down) 
+    public void setExit(String direction, Room neighbor) 
     {
-        if(north != null)
-            northExit = north;
-        if(east != null)
-            eastExit = east;
-        if(south != null)
-            southExit = south;
-        if(west != null)
-            westExit = west;
-        upExit = up;
-        downExit = down;
+        exits.put(direction, neighbor);
     }
 
     /**
@@ -93,28 +60,15 @@ public class Room
 
     /**
      * Return exit description.
-     * @return String that represents the direction that leads to the next room.
+     * @return 
      */
     public String getExitString(){
-        String exit = "Exists: ";
-        if(northExit != null) {
-            exit += "north ";
+        Set<String> exitsString = exits.keySet();
+        Strin exit = "";
+        for( String e: exitsString){
+            exit += e + " ";
         }
-        if(eastExit != null) {
-            exit += "east ";
-        }
-        if(southExit != null) {
-            exit += "south ";
-        }
-        if(westExit != null) {
-            exit += "west ";
-        }
-        if(upExit != null) {
-            exit += "up ";
-        }
-        if(downExit != null) {
-            exit += "down ";
-        }
+        
 
         return exit;
     }
