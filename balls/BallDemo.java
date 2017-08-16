@@ -28,7 +28,7 @@ public class BallDemo
      */
     public BallDemo()
     {
-        myCanvas = new Canvas("Ball Demo", 1000, 900);
+        myCanvas = new Canvas("Ball Demo", WIDTH, HEIGHT);
         myCanvas.setVisible(true);
 
         balls = new ArrayList<BouncingBall>();
@@ -57,15 +57,16 @@ public class BallDemo
         myCanvas.setForegroundColor(Color.blue);
         myCanvas.drawLine(xStart, ground, xLimit, ground);
 
-        int pos = xStart;
+        int pos = (int) (0.5 * canvasDimension.width);
         // crate and show the balls
         if( number > 0){
             while( number-- > 0 ){
+                int xPos = ThreadLocalRandom.current().nextInt(xStart,pos);
                 int yPos = ThreadLocalRandom.current().nextInt(yLimit, yMin);
                 int diameter = ThreadLocalRandom.current().nextInt(10, 56); 
                 int color = ThreadLocalRandom.current().nextInt(0, colors.size()); 
-                BouncingBall newBall = new BouncingBall(xStart, yPos, diameter, colors.get(color), ground, myCanvas);
-                yPos += 30;
+    
+                BouncingBall newBall = new BouncingBall(xPos, yPos, diameter, colors.get(color), ground, myCanvas);
                 balls.add( newBall);
             }
         } else {
@@ -100,12 +101,14 @@ public class BallDemo
      * Draw rectangle inside canvas.
      */
     public void drawFrame(){
-        // the shape to draw and move
+        // Erase any old canvas 
         Dimension canvasDimension = myCanvas.getSize();
-        myCanvas.setForegroundColor(Color.white);
-        Rectangle rect = new Rectangle(20, 20, canvasDimension.width-40, canvasDimension.height-40);
+        myCanvas.erase();
 
-        // at the end of the move, draw and fill once more so that it remains visible
+        myCanvas.setForegroundColor(Color.white);
+
+        //Draw rectangle
+        Rectangle rect = new Rectangle(20, 20, canvasDimension.width-40, canvasDimension.height-40);
         myCanvas.fill(rect);
     }
     
