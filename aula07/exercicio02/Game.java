@@ -15,6 +15,8 @@
  * @version 2008.03.30
  */
 
+import java.util.HashMap;
+
 public class Game 
 {
     private Parser parser;
@@ -77,6 +79,7 @@ public class Game
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
+
             finished = processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
@@ -111,13 +114,13 @@ public class Game
         }
 
         String commandWord = command.getCommandWord();
-        if (commandWord.equals("help"))
+        if (commandWord == "help")
             printHelp();
-	else if( commanWord.equals("look))
-	    look();
-        else if (commandWord.equals("go"))
+	    else if( commandWord == CommandWord.LOOK.toString() )
+	       look();
+        else if (commandWord.equals(CommandWord.GO.toString()) )
             goRoom(command);
-        else if (commandWord.equals("quit"))
+        else if (commandWord == CommandWord.QUIT.toString() )
             wantToQuit = quit(command);
 
         return wantToQuit;

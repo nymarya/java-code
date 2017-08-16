@@ -9,19 +9,25 @@
  * @version 2008.03.30
  */
 
+import java.util.HashMap;
+import java.util.Set;
+
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private static final String[] validCommands = {
-        "go", "quit", "help", "look"
-    };
+    private HashMap<String, CommandWord> validCommands;
 
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
-        // nothing to do at the moment...
+        validCommands = new HashMap<String, CommandWord>();
+        for( CommandWord command : CommandWord.values() ){
+            if( command != CommandWord.UNKNOWN){
+                validCommands.put(command.toString(), command);
+            }
+        }
     }
 
     /**
@@ -31,18 +37,15 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
-                return true;
-        }
-        // if we get here, the string was not found in the commands
-        return false;
+        // try to get the word
+        return validCommands.containsKey(aString);
     }
 
     public void showAll(){
-	for(String command: validCommands) {
-	    System.out.println(command + " ");
-	}
-	System.out.println();
+        Set<String> words = validCommands.keySet();
+    	for(String command: words) {
+    	    System.out.println(command + " ");
+    	}
+    	System.out.println();
    }
 }
