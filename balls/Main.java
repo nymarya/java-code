@@ -1,16 +1,16 @@
-import java.lang.Thread;
+import java.util.Scanner;
 
 public class Main{
 
     public static void main(String [] args){
         BallDemo ball = new BallDemo();
-        try{
-            Thread.sleep(5000);
-            
-        } catch( InterruptedException e) {}
+        Scanner reader = new Scanner(System.in);
+        String number = reader.next();
+
+        while( number != null){
             ball.drawFrame();
-            ball.bounce(5);
-            ball.drawFrame();
-            ball.bounce(40);
+            ball.bounce( Integer.parseInt(number) );
+            number = reader.next();
         }
+    }
 }

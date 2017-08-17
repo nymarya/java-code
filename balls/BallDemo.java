@@ -58,7 +58,7 @@ public class BallDemo
         myCanvas.drawLine(xStart, ground, xLimit, ground);
 
         int pos = (int) (0.5 * canvasDimension.width);
-        // crate and show the balls
+        // create and show the balls
         if( number > 0){
             while( number-- > 0 ){
                 int xPos = ThreadLocalRandom.current().nextInt(xStart,pos);
