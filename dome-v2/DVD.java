@@ -29,4 +29,18 @@ public class DVD extends Item
     {
         return director;
     }
+
+    /** 
+     * Create string representation to the object.
+     */
+    public String toString(){
+        return super.toString() + "    director: " + director + "\n";
+    }
+
+    /**
+     * Override method print from Item class.
+     */
+    public void print(){
+        System.out.println( toString() );
+    }
 }

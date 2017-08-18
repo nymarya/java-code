@@ -60,17 +60,24 @@ public class Item
         return gotIt;
     }
 
+    /** 
+     * Create string representation to the object.
+     */
+    public String toString(){
+        String line = title + " (" + playingTime + ") mins\n" ;
+        if(gotIt)
+            return line + "    " + comment + "\n";
+        else
+            return line;
+    }
+
     /**
      * Print details about this item to the text terminal.
      */
     public void print()
     {
-        System.out.print("title: " + title + " (" + playingTime + " mins)");
-        if(gotIt) {
-            System.out.println("*");
-        } else {
-            System.out.println();
-        }
-        System.out.println("    " + comment);
+        System.out.println( toString() );
     }
+
+
 }

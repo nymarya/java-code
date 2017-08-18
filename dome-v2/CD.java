@@ -39,4 +39,18 @@ public class CD extends Item
     {
         return numberOfTracks;
     }
+
+    /** 
+     * Create string representation to the object.
+     */
+    public String toString(){
+        return super.toString() + "    " + artist + "\n    tracks: " + numberOfTracks;
+    }
+
+    /**
+     * Override method print from Item class.
+     */
+    public void print(){
+        System.out.println( toString() );
+    }
 }
