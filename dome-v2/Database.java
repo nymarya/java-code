@@ -39,8 +39,7 @@ public class Database
     public void list()
     {
         for(Item item : items) {
-            item.print();
-            System.out.println();   // empty line between items
+            System.out.println(item);   // empty line between items
         }
     }
 }

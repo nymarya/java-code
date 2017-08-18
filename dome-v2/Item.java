@@ -79,5 +79,19 @@ public class Item
         System.out.println( toString() );
     }
 
+    /**
+     * Get title of this item.
+     */
+    protected String getTitle(){
+        return title + "*\n ";
+    }
+
+    /**
+     * Get playing time of this item.
+     */
+    protected String getPlayingTime(){
+        return playingTime + "    \n ";
+    }
+
 
 }

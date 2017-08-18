@@ -44,7 +44,8 @@ public class CD extends Item
      * Create string representation to the object.
      */
     public String toString(){
-        return super.toString() + "    " + artist + "\n    tracks: " + numberOfTracks;
+        return "CD: "+ artist + ": " + super.getTitle() + "    "+ numberOfTracks + " tracks, "
+            + super.getPlayingTime() + "    " + super.getComment() + "\n";
     }
 
     /**
