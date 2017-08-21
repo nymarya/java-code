@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=nome\ comprimento\ cor\ velocidade\ alimento\ tamanhoBico
+comment0.target=Aguia(java.lang.String,\ int,\ java.lang.String,\ float,\ java.lang.String,\ int)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ \u00C1guia\r\n
+comment1.params=
+comment1.target=int\ getComprimento()
+comment2.params=
+comment2.target=int\ getTamanhoBico()
+comment3.params=
+comment3.target=java.lang.String\ getCor()
+comment4.params=velocidade
+comment4.target=float\ getVelocidade(float)
+comment5.params=comprimento
+comment5.target=void\ setComprimento(int)
+comment6.params=tamanhoBico
+comment6.target=void\ setTamanhoBico(int)
+comment7.params=cor
+comment7.target=void\ setCor(java.lang.String)
+comment8.params=velocidade
+comment8.target=void\ setVelocidade(float)
+comment9.params=
+comment9.target=void\ alimentarAguia()
+numComments=10

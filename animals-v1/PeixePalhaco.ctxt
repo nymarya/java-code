@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.params=nome\ comprimento\ cor\ alimento
+comment0.target=PeixePalhaco(java.lang.String,\ int,\ java.lang.String,\ java.lang.String)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ PeixePalhaco\r\n
+comment1.params=
+comment1.target=int\ getComprimento()
+comment2.params=
+comment2.target=java.lang.String\ getCor()
+comment3.params=comprimento
+comment3.target=void\ setComprimento(int)
+comment4.params=cor
+comment4.target=void\ setCor(java.lang.String)
+comment5.params=
+comment5.target=void\ alimentarPeixePalhaco()
+numComments=6

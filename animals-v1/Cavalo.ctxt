@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.params=nome\ comprimento\ cor\ velocidade
+comment0.target=Cavalo(java.lang.String,\ int,\ java.lang.String,\ float)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Animal\r\n
+comment1.params=
+comment1.target=int\ getComprimento()
+comment2.params=
+comment2.target=java.lang.String\ getCor()
+comment3.params=velocidade
+comment3.target=float\ getVelocidade(float)
+comment4.params=comprimento
+comment4.target=void\ setComprimento(int)
+comment5.params=cor
+comment5.target=void\ setCor(java.lang.String)
+comment6.params=velocidade
+comment6.target=void\ setVelocidade(float)
+comment7.params=
+comment7.target=void\ alimentarCavalo()
+numComments=8
