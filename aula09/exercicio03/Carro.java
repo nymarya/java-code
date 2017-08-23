@@ -1,6 +1,6 @@
 public class Carro extends Veiculo {
 
-    private int potencia;
+    private double potencia;
     private int quantidadePortas;
 
     /**
@@ -11,7 +11,7 @@ public class Carro extends Veiculo {
      * @param potencia Potência do carro.
      * @param quantidadePortas Quantidade de portas do carro.
      */ 
-    public Veiculo(String marca, String modelo, int numeroPlaca, int potencia, 
+    public Carro(String marca, String modelo, int numeroPlaca, double potencia, 
         int quantidadePortas) {
         super( marca, modelo, numeroPlaca);
         this.potencia = potencia;
@@ -22,7 +22,7 @@ public class Carro extends Veiculo {
      * Recupera potência do carro.
      * @return potência do carro.
      */ 
-    public int getPotencia() {
+    public double getPotencia() {
         return potencia;
     }
 
@@ -30,7 +30,7 @@ public class Carro extends Veiculo {
      * Atualiza potência do carro.
      * @param potencia Potência do carro.
      */ 
-    public void setPotencia( int potencia ) {
+    public void setPotencia( double potencia ) {
         this.potencia = potencia;
     }
 
@@ -46,8 +46,20 @@ public class Carro extends Veiculo {
      * Atualiza quantidade de portas do carro.
      * @param quantidadePortas Quantidade de portas do carro.
      */ 
-    public void setQuantidade( int quantidadePortas) {
+    public void setQuantidadePortas( int quantidadePortas) {
         this.quantidadePortas = quantidadePortas;
+    }
+
+    /**
+     * Imprime detalhes sobre o veiculo
+     */
+    public void print()
+    {
+        System.out.println("CARRO");
+        super.print();
+        System.out.println("Potência: " + potencia);
+        System.out.println("Quantidade de portas: " + quantidadePortas);
+        System.out.println();
     }
 
 }

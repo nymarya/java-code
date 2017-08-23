@@ -64,4 +64,14 @@ public class Veiculo {
         this.numeroPlaca = numeroPlaca;
     }
 
+    /**
+     * Imprime detalhes sobre o veiculo
+     */
+    public void print()
+    {
+        System.out.println( "Modelo: " + modelo);
+        System.out.println( "Marca: " + marca);
+        System.out.println( "Placa: " + numeroPlaca);
+    }
+
 }

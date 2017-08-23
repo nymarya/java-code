@@ -11,7 +11,7 @@ public class Moto extends Veiculo {
      * @param tipoPartida Tipo da partida da moto.
      * @param cilindradas Cilindradas da moto.
      */ 
-    public Veiculo(String marca, String modelo, int numeroPlaca, String tipoPartida, 
+    public Moto(String marca, String modelo, int numeroPlaca, String tipoPartida, 
         float cilindradas) {
         super( marca, modelo, numeroPlaca);
         this.tipoPartida = tipoPartida;
@@ -22,7 +22,7 @@ public class Moto extends Veiculo {
      * Recupera tipo da partida da moto.
      * @return tipo da partida da moto.
      */ 
-    public String getTipoPartisa() {
+    public String getTipoPartida() {
         return tipoPartida;
     }
 
@@ -48,6 +48,18 @@ public class Moto extends Veiculo {
      */ 
     public void setCilindradas( float cilindradas) {
         this.cilindradas = cilindradas;
+    }
+
+    /**
+     * Imprime detalhes sobre o veiculo
+     */
+    public void print()
+    {
+    	System.out.println("MOTO");
+        super.print();
+        System.out.println("Tipo da partida: " + tipoPartida);
+        System.out.println("Cilindradas: " + cilindradas);
+        System.out.println();
     }
 
 }
