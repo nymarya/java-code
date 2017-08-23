@@ -13,7 +13,7 @@ public class Celular extends ProdutoDuravel {
      * @param marca Marca do celular.
      * @param descricao Descrição do celular.
      * @param dataFabricacao Data de fabricação do celular.
-     * @param material Material predominando no celular.
+     * @param material Material predominante no celular.
      * @param durabilidade Durabilidade do celular.
      * @param capacidade Capacidade de armazenamento do celular.
      * @param pixels Quantidade de megapixels da câmera do celular.

@@ -12,7 +12,7 @@ public class Carro extends ProdutoDuravel {
      * @param marca Marca do carro.
      * @param descricao Descrição do carro.
      * @param dataFabricacao Data de fabricação do carro.
-     * @param material Material predominando no carro.
+     * @param material Material predominante no carro.
      * @param durabilidade Durabilidade do carro.
      * @param velocidade Velocidade do carro.
      * @param cor Cor do carro.

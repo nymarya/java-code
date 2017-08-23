@@ -6,7 +6,7 @@ public class Chocolate extends ProdutoNaoDuravel {
     private String ingredienteExtra;
 
     /**
-     * Construtor para objetos da classe Pizza
+     * Construtor para objetos da classe Chocolate
      * @param preco Nome do chocolate.
      * @param preco Preço do chocolate.
      * @param marca Marca do chocolate.
@@ -17,7 +17,7 @@ public class Chocolate extends ProdutoNaoDuravel {
      * @param porcentagemCacau Porcentagem de cacau no chocolate.
      * @param ingredienteExtra Ingrediente extra do chocolate.
      */ 
-    public Pizza( String nome, double preco, String marca, String descricao, 
+    public Chocolate( String nome, double preco, String marca, String descricao, 
         LocalDate dataFabricacao, LocalDate dataValidade, String genero, 
         float porcentagemCacau, String ingredienteExtra ) {
 	    super( nome, preco, marca, descricao, dataFabricacao, dataValidade, genero);
