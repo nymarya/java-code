@@ -17,7 +17,7 @@ public class Refrigerante extends ProdutoNaoDuravel {
      */ 
     public Refrigerante( String nome, double preco, String marca, String descricao, 
         LocalDate dataFabricacao, LocalDate dataValidade, String genero, 
-        int fatias, boolean bordaRecheada ) {
+        int mililitros ) {
 	    super( nome, preco, marca, descricao, dataFabricacao, dataValidade, genero);
 	    this.mililitros = mililitros;
     }

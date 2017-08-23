@@ -3,7 +3,7 @@ import java.time.LocalDate;
 public class Celular extends ProdutoDuravel {
 
     private int capacidade;
-    private float megapixelsCamera;
+    private double megapixelsCamera;
     private String cor;
 
     /**
@@ -19,7 +19,7 @@ public class Celular extends ProdutoDuravel {
      * @param pixels Quantidade de megapixels da câmera do celular.
      * @param cor Cor do celular.
      */ 
-    public Celular( String nome, double preco, String marca, String descricao, LocalDate dataFabricacao, String material, int durabilidade, int capacidade, float pixels, String cor ) {
+    public Celular( String nome, double preco, String marca, String descricao, LocalDate dataFabricacao, String material, int durabilidade, int capacidade, double pixels, String cor ) {
 	super( nome, preco, marca, descricao, dataFabricacao, material, durabilidade);
 	this.capacidade = capacidade;
         this.megapixelsCamera = pixels;
@@ -54,7 +54,7 @@ public class Celular extends ProdutoDuravel {
      * Atualiza quantidade de megapixels da câmera do celular.
      * @param pixels Quantidade de megapixels da câmera do celular.
      */ 
-    public void setMegapixelsCamera( float pixels ) {
+    public void setMegapixelsCamera( double pixels ) {
         this.megapixelsCamera = pixels;
     }
 

@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 public class Chocolate extends ProdutoNaoDuravel {
 
-    private float porcentagemCacau;
+    private double porcentagemCacau;
     private String ingredienteExtra;
 
     /**
@@ -19,7 +19,7 @@ public class Chocolate extends ProdutoNaoDuravel {
      */ 
     public Chocolate( String nome, double preco, String marca, String descricao, 
         LocalDate dataFabricacao, LocalDate dataValidade, String genero, 
-        float porcentagemCacau, String ingredienteExtra ) {
+        double porcentagemCacau, String ingredienteExtra ) {
 	    super( nome, preco, marca, descricao, dataFabricacao, dataValidade, genero);
 	    this.porcentagemCacau = porcentagemCacau;
 	    this.ingredienteExtra = ingredienteExtra;
@@ -29,7 +29,7 @@ public class Chocolate extends ProdutoNaoDuravel {
      * Retorna porcentagem de cacau.
      * @return Porcentagem de cacau no chocolate.
      */ 
-    public float getPorcentagemCacau(){
+    public double getPorcentagemCacau(){
 	   return porcentagemCacau;
     }
 
@@ -37,7 +37,7 @@ public class Chocolate extends ProdutoNaoDuravel {
      * Atualiza porcentagem de cacau.
      * @param porcentagemCacau Porcentagem de cacau no chocolate.
      */ 
-    public void setPorcentagemCacau( float porcentagemCacau ) {
+    public void setPorcentagemCacau( double porcentagemCacau ) {
 	   this.porcentagemCacau = porcentagemCacau;
     }
 

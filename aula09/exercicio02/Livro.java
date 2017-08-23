@@ -3,7 +3,7 @@ import java.time.LocalDate;
 public class Livro extends ProdutoDuravel {
 
     private String autor;
-    private String titulo;
+    private int edicao;
 
     /**
      * Construtor para objetos da classe Livro.
@@ -14,29 +14,30 @@ public class Livro extends ProdutoDuravel {
      * @param dataFabricacao Data de fabricação do livro.
      * @param material Material predominante no livro.
      * @param durabilidade Durabilidade do livro.
-     * @param autor Autor do carro.
-     * @param titulo Titulo do carro.
+     * @param autor Autor do livro.
+     * @param edicao Edição do livro.
      */ 
-    public Livro( String nome, double preco, String marca, String descricao, LocalDate dataFabricacao, String material, int durabilidade, String autor, String titulo ) {
+    public Livro( String nome, double preco, String marca, String descricao, LocalDate dataFabricacao, 
+        String material, int durabilidade, String autor, int edicao ) {
 	super( nome, preco, marca, descricao, dataFabricacao, material, durabilidade);
 	this.autor = autor;
-	this.titulo = titulo;
+	this.edicao = edicao;
     }
 
     /**
-     * Retorna titulo do livro.
-     * @return Titutlo do livro.
+     * Retorna edição do livro.
+     * @return Edição do livro.
      */ 
-    public String getTitulo(){
-	return titulo;
+    public int getEdicao(){
+	return edicao;
     }
 
     /**
-     * Atualiza titulo do livro.
-     * @param titulo Titulo do carro.
+     * Atualiza edicao do livro.
+     * @param edicao Edição do carro.
      */ 
-    public void setTitulo( String titulo ) {
-	this.titulo = titulo;
+    public void setEdicao( int edicao ) {
+	this.edicao = edicao;
     }
 
     /**
