@@ -7,6 +7,7 @@ public class Carro extends ProdutoDuravel {
 
     /**
      * Construtor para objetos da classe Carro
+     * @param nome Nome do carro.
      * @param preco Preco do carro.
      * @param marca Marca do carro.
      * @param descricao Descrição do carro.
@@ -16,8 +17,8 @@ public class Carro extends ProdutoDuravel {
      * @param velocidade Velocidade do carro.
      * @param cor Cor do carro.
      */ 
-    public Carro( double preco, String marca, String descricao, LocalDate dataFabricacao, String material, int durabilidade, int velocidade, String cor ) {
-	super( "Carro", preco, marca, descricao, dataFabricacao, material, durabilidade);
+    public Carro( String nome, double preco, String marca, String descricao, LocalDate dataFabricacao, String material, int durabilidade, int velocidade, String cor ) {
+	super( nome, preco, marca, descricao, dataFabricacao, material, durabilidade);
 	this.velocidade = velocidade;
 	this.cor = cor;
     }

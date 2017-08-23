@@ -24,17 +24,17 @@ public class Refrigerante extends ProdutoNaoDuravel {
 
     /**
      * Retorna quantidade de mililitros.
-     * @return Quantitdade de mililitros do refrigerante.
+     * @return Quantidade de mililitros do refrigerante.
      */ 
     public int getMililitros(){
-	   return fatias;
+	   return mililitros;
     }
 
     /**
      * Atualiza quantidade de mililitros.
      * @param fatias Quantidade de mililitros do refrigerante.
      */ 
-    public void setMililitros( int fatias ) {
-	   this.fatias = fatias;
+    public void setMililitros( int mililitros ) {
+	   this.mililitros = mililitros;
     }
 }

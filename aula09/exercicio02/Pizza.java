@@ -27,7 +27,7 @@ public class Pizza extends ProdutoNaoDuravel {
 
     /**
      * Retorna quantidade de fatias da pizza.
-     * @return Quantitdade de fatias da pizza.
+     * @return Quantidade de fatias da pizza.
      */ 
     public int getFatias(){
 	   return fatias;
@@ -46,7 +46,7 @@ public class Pizza extends ProdutoNaoDuravel {
      * @return Verdadeiro se pizza possui borda recheada, falso caso contrário.
      */ 
     public boolean getBordaRecheada(){
-        return bordaRecheada;
+            return bordaRecheada;
     }
 
     /**
@@ -54,6 +54,6 @@ public class Pizza extends ProdutoNaoDuravel {
      * @param bordaRecheada Valor que informa se pizza possui borda recheada.
      */ 
     public void setBordaRecheada( boolean bordaRecheada) {
-        this.bordaRecheada = bordaRecheada;
+            this.bordaRecheada = bordaRecheada;
     }
 }

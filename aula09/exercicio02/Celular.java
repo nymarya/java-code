@@ -8,6 +8,7 @@ public class Celular extends ProdutoDuravel {
 
     /**
      * Construtor para objetos da classe Celular
+     * @param nome Nome do celular.
      * @param preco Preco do celular.
      * @param marca Marca do celular.
      * @param descricao Descrição do celular.
@@ -18,8 +19,8 @@ public class Celular extends ProdutoDuravel {
      * @param pixels Quantidade de megapixels da câmera do celular.
      * @param cor Cor do celular.
      */ 
-    public Celular( double preco, String marca, String descricao, LocalDate dataFabricacao, String material, int durabilidade, int capacidade, float pixels, String cor ) {
-	super( "Celular", preco, marca, descricao, dataFabricacao, material, durabilidade);
+    public Celular( String nome, double preco, String marca, String descricao, LocalDate dataFabricacao, String material, int durabilidade, int capacidade, float pixels, String cor ) {
+	super( nome, preco, marca, descricao, dataFabricacao, material, durabilidade);
 	this.capacidade = capacidade;
         this.megapixelsCamera = pixels;
 	this.cor = cor;
