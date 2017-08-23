@@ -19,10 +19,10 @@ public class Celular extends ProdutoDuravel {
      * @param cor Cor do celular.
      */ 
     public Celular( double preco, String marca, String descricao, LocalDate dataFabricacao, String material, int durabilidade, int capacidade, float pixels, String cor ) {
-	    super( "Celular", preco, marca, descricao, dataFabricacao, material, durabilidade);
-	    this.capacidade = capacidade;
+	super( "Celular", preco, marca, descricao, dataFabricacao, material, durabilidade);
+	this.capacidade = capacidade;
         this.megapixelsCamera = pixels;
-	    this.cor = cor;
+	this.cor = cor;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Celular extends ProdutoDuravel {
      * @return Capacidade de armazenamento do celular.
      */ 
     public int getCapacidade(){
-	   return capacidade;
+	return capacidade;
     }
 
     /**
@@ -38,7 +38,7 @@ public class Celular extends ProdutoDuravel {
      * @param capacidade Capacidade de armazenamento do celular.
      */ 
     public void setCapacidade( int capacidade ) {
-	   this.capacidade = capacidade;
+	this.capacidade = capacidade;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Celular extends ProdutoDuravel {
      * @return Cor do celular.
      */ 
     public String getCor() {
-	   return cor;
+	return cor;
     }
 
     /**
@@ -70,7 +70,7 @@ public class Celular extends ProdutoDuravel {
      * @param cor Cor do celular.
      */ 
     public void setCor( String cor ) { 
-	   this.cor = cor;
+	this.cor = cor;
     }
    
 }
