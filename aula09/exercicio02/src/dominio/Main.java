@@ -1,3 +1,5 @@
+package dominio;
+
 import java.time.LocalDate;
 
 public class Main {
@@ -7,9 +9,10 @@ public class Main {
 		LocalDate dataFabricacao = LocalDate.of(2017, 01, 01);
 		LocalDate dataValidade = LocalDate.of(2018, 01, 01);
 
-		Pizza pizza = new Pizza("3 queijos", 40.0, "Sadia", 
+		Produto pizza = new Pizza("3 queijos", 40.0, "Sadia", 
 			"pizza com desconto", dataFabricacao, dataValidade, 
 			"alimenticio", 8, true);
+
 
 		Chocolate chocolate = new Chocolate("Chocolate meio amargo", 4.50, "Hershey's", 
 			"promoçao de dia dos namorados", dataFabricacao, dataValidade, 
