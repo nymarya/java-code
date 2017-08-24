@@ -1,8 +1,11 @@
+import java.time.LocalDate;
+
 public class Veiculo {
 
     private String marca;
     private String modelo;
     private int numeroPlaca;
+    private LocalDate dataDevolucao;
 
     /**
      * Construtor para objetos da classe Veiculo
@@ -14,6 +17,7 @@ public class Veiculo {
         this.marca = marca;
         this.modelo = modelo;
         this.numeroPlaca = numeroPlaca;
+        this.dataDevolucao = LocalDate.now();
     }
 
     /**
@@ -72,6 +76,30 @@ public class Veiculo {
         System.out.println( "Modelo: " + modelo);
         System.out.println( "Marca: " + marca);
         System.out.println( "Placa: " + numeroPlaca);
+    }
+
+    /**
+     * Retorna custo de aluguel.
+     * @return Custo do aluguel de acordo com veículo.
+     */
+    public double getCustoAluguel(){
+        return 0.0;
+    }
+
+    /**
+     * Retorna data de devolução do veículo.
+     * @return Data de devolução.
+     */
+    public LocalDate getDataDevolucao(){
+        return dataDevolucao;
+    }
+
+    /**
+     * Atualiza data de devolução do veículo.
+     * @param data Data de devolução.
+     */
+    public void setDataDevolucao( LocalDate dataDevolucao){
+        this.dataDevolucao = dataDevolucao;
     }
 
 }

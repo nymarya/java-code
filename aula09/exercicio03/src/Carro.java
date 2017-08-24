@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Carro extends Veiculo {
 
     private double potencia;
@@ -60,6 +62,24 @@ public class Carro extends Veiculo {
         System.out.println("Potência: " + potencia);
         System.out.println("Quantidade de portas: " + quantidadePortas);
         System.out.println();
+    }
+
+    /**
+     * Retorna custo de aluguel.
+     * @return Custo do aluguel do carro.
+     */
+    public double getCustoAluguel(){
+        return 100 * potencia;
+    }
+
+     /**
+     * Retorna data de devolução do veículo.
+     * @return Data de devolução com veículo.
+     */
+    public LocalDate getDataDevolucao(){
+        LocalDate novaData = super.getDataDevolucao().plusDays(2);
+
+        return novaData;
     }
 
 }

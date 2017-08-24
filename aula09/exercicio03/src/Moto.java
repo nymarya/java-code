@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Moto extends Veiculo {
 
     private String tipoPartida;
@@ -62,4 +64,21 @@ public class Moto extends Veiculo {
         System.out.println();
     }
 
+    /**
+     * Retorna custo de aluguel.
+     * @return Custo do aluguel da moto.
+     */
+    public double getCustoAluguel(){
+        return 2 * cilindradas;
+    }
+
+     /**
+     * Retorna data de devolução.
+     * @return Data de devolução da moto.
+     */
+    public LocalDate getDataDevolucao(){
+        LocalDate novaData = super.getDataDevolucao().plusDays(3);
+
+        return novaData;
+    }
 }

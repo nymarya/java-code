@@ -8,6 +8,18 @@ public class Main{
     	locadora.adicionarVeiculo(carro);
     	locadora.adicionarVeiculo(moto1);
 
-    	locadora.listar();
+		locadora.listar();
+
+		Cliente cliente1 = new Cliente("Maria", 3983239);
+		Cliente cliente2 = new Cliente("Joao", 9283933);
+
+		locadora.alugarVeiculo( carro, cliente1);
+		locadora.alugarVeiculo( moto1, cliente2);
+
+		locadora.devolverVeiculo( carro );
+
+		locadora.imprimirAlugados();
+
+    	
     }
 }

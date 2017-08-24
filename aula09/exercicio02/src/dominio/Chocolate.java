@@ -1,3 +1,5 @@
+package dominio;
+
 import java.time.LocalDate;
 
 public class Chocolate extends ProdutoNaoDuravel {
