@@ -34,7 +34,8 @@ public class DVD extends Item
      * Create string representation to the object.
      */
     public String toString(){
-        return super.toString() + "    director: " + director + "\n";
+	return "DVD: "+ super.getTitle() + "   by "+ director + " \n"
+            + "    " + super.getPlayingTime() + super.getComment();
     }
 
     /**

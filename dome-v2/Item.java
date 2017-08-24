@@ -64,7 +64,7 @@ public class Item
      * Create string representation to the object.
      */
     public String toString(){
-        String line = title + " (" + playingTime + ") mins\n" ;
+        String line = title + " (" + playingTime + " mins)\n" ;
         if(gotIt)
             return line + "    " + comment + "\n";
         else
@@ -90,7 +90,7 @@ public class Item
      * Get playing time of this item.
      */
     protected String getPlayingTime(){
-        return playingTime + "    \n ";
+        return playingTime + " mins    \n ";
     }
 
 
