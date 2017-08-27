@@ -42,6 +42,14 @@ public class Helper
 		} else { 
 			System.out.println("Alguma coisa errada");
 		}
+
+		Taxi taxi2 = (Taxi) taxiCo1.lookup("Car #2");		
+		taxi1.book("UFRN");
+		if ("UFRN".equalsIgnoreCase(taxi1.getDestination()) ) {
+			System.out.println("Funcionou");
+		} else { 
+			System.out.println("Alguma coisa errada");
+		}
 	}
 
 	/**
@@ -57,6 +65,32 @@ public class Helper
 		} else { 
 			System.out.println("Alguma coisa errada");
 		}
+
+		Taxi taxi2 = (Taxi) taxiCo1.lookup("Car #2");
+		taxi2.book("UFRN");
+		taxi2.arrived();
+		if ( taxi2.getDestination() == null && "UFRN".equalsIgnoreCase(taxi2.getLocation()) ) {
+			System.out.println("Funcionou");
+		} else { 
+			System.out.println("Alguma coisa errada");
+		}
+	}
+
+	/**
+	 * Test the status of a taxi after it has arrived.
+	 */
+	public void testStatus()
+	{
+		taxiCo1.showStatus();
+
+		Shuttle shuttle1 = (Shuttle) taxiCo1.lookup("Shuttle #3");
+		while( ! "base".equalsIgnoreCase(shuttle1.getDestination())){
+			System.out.println();
+			shuttle1.arrived();
+
+			taxiCo1.showStatus();
+		}
+		
 	}
 
 	public static void main(String[] args) {
@@ -66,6 +100,9 @@ public class Helper
 		
 		System.out.println("Segundo teste");
 		helper.testArrived();
+
+		System.out.println("Terceiro teste");
+		helper.testStatus();
 	}
 }
 

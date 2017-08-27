@@ -34,8 +34,12 @@
      */
     public String getStatus()
     {
-        return id + " at " + location + " headed for " +
-               destination;
+        String status =  id + " at " + location + " headed for ";
+        if( destination == null ){
+            destination = "nowhere";
+        }
+
+        return status + destination;
     }
     
     /**
