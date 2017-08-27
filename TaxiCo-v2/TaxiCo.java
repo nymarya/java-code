@@ -117,4 +117,29 @@ public class TaxiCo
         destinations.add("Sainsbury's");
         destinations.add("Darwin");
     }
+
+    /**
+     * Check whether vehicle is available.
+     * @param destination Destination that client intends to go.
+     */
+    public Vehicle goTo( String destination){
+        for( Vehicle vehicle : fleet ){
+            if( vehicle instanceof Shuttle){
+                if( destination.equalsIgnoreCase(vehicle.getDestination()))
+                    return vehicle;
+            }
+        }
+
+        for( Vehicle vehicle : fleet ){
+            if( vehicle instanceof Taxi){
+                Taxi taxi = (Taxi) vehicle;
+                if( taxi.isAvailable() && 
+                    destination.equalsIgnoreCase(vehicle.getDestination()) 
+                    )
+                    return vehicle;
+            }
+        }
+
+        return null;
+    }
 }

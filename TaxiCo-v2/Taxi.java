@@ -43,4 +43,12 @@ public class Taxi extends Vehicle
         setDestination( null );
         free = true;
     }
+
+    /**
+     * Check if taxi is free.
+     * @return True if taxi is available, false otherwise.
+     */
+    public boolean isAvailable(){
+        return free;
+    }
 }
