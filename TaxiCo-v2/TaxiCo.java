@@ -123,16 +123,14 @@ public class TaxiCo
      * @param destination Destination that client intends to go.
      */
     public Vehicle goTo( String destination){
+        Vehicle available = null;
+
         for( Vehicle vehicle : fleet ){
             if( vehicle instanceof Shuttle){
                 Shuttle shuttle = ( Shuttle) vehicle;
                 if( destinations.indexOf( destination ) != -1)
                     return vehicle;
-            }
-        }
-
-        for( Vehicle vehicle : fleet ){
-            if( vehicle instanceof Taxi){
+            } else {
                 Taxi taxi = (Taxi) vehicle;
                 if( taxi.isAvailable() )
                     return vehicle;

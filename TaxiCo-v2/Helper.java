@@ -105,11 +105,26 @@ public class Helper
 		} else {
 			System.out.println("Something went wrong.");
 		}
-		
+
+		//Book all taxis
+		Taxi taxi1 = (Taxi) taxiCo1.lookup("Car #1");
+		taxi1.book("HIPER");
+
 		available = taxiCo1.goTo("Anywhere");
 
 		if( available != null ){
 			System.out.println("Vehicle available");
+		} else {
+			System.out.println("Something went wrong.");
+		}
+
+		Taxi taxi2 = (Taxi) taxiCo1.lookup("Car #2");
+		taxi2.book("UFRN");
+		
+		available = taxiCo1.goTo("Anywhere");
+
+		if( available == null ){
+			System.out.println("No vehicle available");
 		} else {
 			System.out.println("Something went wrong.");
 		}
