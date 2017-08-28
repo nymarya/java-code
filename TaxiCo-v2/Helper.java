@@ -77,7 +77,7 @@ public class Helper
 	}
 
 	/**
-	 * Test the status of a taxi after it has arrived.
+	 * Test the status of a shuttle after it has arrived.
 	 */
 	public void testStatus()
 	{
@@ -93,6 +93,28 @@ public class Helper
 		
 	}
 
+	/**
+	 * A simulation of a client calling a vehicle.
+	 */
+	public void testCallTo()
+	{
+		Vehicle available = taxiCo1.goTo("Darwin");
+
+		if( available != null ){
+			System.out.println("Vehicle available");
+		} else {
+			System.out.println("Something went wrong.");
+		}
+		
+		available = taxiCo1.goTo("Anywhere");
+
+		if( available != null ){
+			System.out.println("Vehicle available");
+		} else {
+			System.out.println("Something went wrong.");
+		}
+	}
+
 	public static void main(String[] args) {
 		Helper helper = new Helper();
 		System.out.println("Primeiro teste");
@@ -103,6 +125,9 @@ public class Helper
 
 		System.out.println("Terceiro teste");
 		helper.testStatus();
+
+		System.out.println("Ultimo teste");
+		helper.testCallTo();
 	}
 }
 

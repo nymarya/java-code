@@ -125,7 +125,8 @@ public class TaxiCo
     public Vehicle goTo( String destination){
         for( Vehicle vehicle : fleet ){
             if( vehicle instanceof Shuttle){
-                if( destination.equalsIgnoreCase(vehicle.getDestination()))
+                Shuttle shuttle = ( Shuttle) vehicle;
+                if( destinations.indexOf( destination ) != -1)
                     return vehicle;
             }
         }
@@ -133,9 +134,7 @@ public class TaxiCo
         for( Vehicle vehicle : fleet ){
             if( vehicle instanceof Taxi){
                 Taxi taxi = (Taxi) vehicle;
-                if( taxi.isAvailable() && 
-                    destination.equalsIgnoreCase(vehicle.getDestination()) 
-                    )
+                if( taxi.isAvailable() )
                     return vehicle;
             }
         }

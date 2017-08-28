@@ -65,4 +65,13 @@ public class Shuttle extends Vehicle
         setNextDestination();
     }
 
+    /**
+     * Check if destination is in the route of the shuttle.
+     * @param destination Destination intended.
+     */
+    public boolean isInRoute( String destination){
+        int index = route.indexOf( destination );
+        return index != -1;
+    }
+
 }
