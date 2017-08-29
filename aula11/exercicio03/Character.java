@@ -1,3 +1,10 @@
+/**
+ * The Charcter class represents a Character object. Characters can move through the 
+ * board, attack each other and attack the castles.
+ * 
+ * @author Mayra D. Azevedo
+ * @version 2017.08.29
+ */
 public class Character {
 	
 	// Type of the player (paladin, samurai)

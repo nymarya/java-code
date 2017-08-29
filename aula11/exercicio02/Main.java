@@ -8,7 +8,7 @@ public class Main{
 	banco.addConta( conta1 );
 	banco.addConta( conta2 );
 
-        conta1.sacar( 200.00 );
+        conta1.sacar( 300.00 );
 	conta1.depositar(100.00);
 
 	ContaPoupanca contaP = (ContaPoupanca) conta2;
