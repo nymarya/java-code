@@ -5,7 +5,7 @@
  * @author Mayra D. Azevedo
  * @version 2017.08.29
  */
-public class Character {
+public class Character extends Piece{
 	
 	// Type of the player (paladin, samurai)
 	private String type;
