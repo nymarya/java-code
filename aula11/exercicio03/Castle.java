@@ -5,7 +5,7 @@
  * @author Mayra D. Azevedo
  * @version 2017.08.29
  */
-public class Castle {
+public class Castle extends Piece{
     
     protected double defense;
     protected double location;
