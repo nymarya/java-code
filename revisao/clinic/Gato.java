@@ -4,13 +4,9 @@ public class Gato extends Animal {
 
 	/**
 	 * Construtor para objeto da classe Gato.
-	 * @param dono Dono do gato.
-	 * @param nome Nome do gato.
-	 * @param pelagem Pelagem do gato.
 	 */
-	public Gato( String dono, String nome, String pelagem ) {
-	    super( dono, nome);
-	    this.pelagem = pelagem;
+	public Gato() {
+		super();
 	}
 
 	/**

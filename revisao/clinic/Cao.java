@@ -6,8 +6,8 @@ public class Cao extends Animal{
     /**
      * Construtor para objeto da classe Cao.
      */
-    public Cao() {
-    
+    public Cao( ) {
+    	super( );
     }
 
     /**

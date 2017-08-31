@@ -5,13 +5,8 @@ public class Animal {
 
 	/**
 	 * Construtor para classe Animal.
-	 * @param dono Dono do animal.
-	 * @param nome Nome do animal.
 	 */
-	public Animal( String dono, String nome ){
-	    this.dono = dono;
-	    this.nome = nome;
-	}
+	public Animal( ){	}
 
 	/**
      * Retorna dono do animal.
