@@ -39,4 +39,12 @@ public class Animal {
     public void setNome( String nome ) {
     	this.nome = nome;
     }
+
+    /**
+     * Cria representação em String da classe.
+     * @return String que representa o animal.
+     */
+    public String toString() {
+        return nome + "\n    Dono: " + dono; 
+    }
 }

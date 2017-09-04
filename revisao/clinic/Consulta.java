@@ -2,7 +2,7 @@ public class Consulta {
 
     private StatusConsulta status;
     private int horario;
-    private Cao cao;
+    private Animal animal;
 
     /**
      * Construtor para classe Consulta.
@@ -10,10 +10,10 @@ public class Consulta {
      * @param horario Horario da consulta.
      * @param cao Cao que sera consultado.
      */
-    public Consulta( int horario, Cao cao ) {
+    public Consulta( int horario, Animal animal ) {
 	this.status = StatusConsulta.MARCADA;
 	this.horario = horario;
-	this.cao = cao;
+	this.animal = animal;
     }
 
     /** 
@@ -45,6 +45,6 @@ public class Consulta {
      * @return String que representa a Consulta.
      */
     public String toString() {
-	return "Status: " + status + "\nHorario: " + horario + "\nCão: "+ Cao.toString(); 
+	return "Status: " + status + "\nHorario: " + horario + "\nBichinho: "+ animal.toString(); 
     }
 }

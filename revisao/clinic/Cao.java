@@ -1,6 +1,4 @@
 public class Cao extends Animal{
-    private String dono;
-    private String nomeCao;
     private String raca;
 
     /**
@@ -8,38 +6,6 @@ public class Cao extends Animal{
      */
     public Cao( ) {
     	super( );
-    }
-
-    /**
-     * Retorna dono do cachorro.
-     * @return Dono do cachorro.
-     */
-    public String getDono(){
-    	return dono;
-    }
-
-    /**
-     * Atualiza nome do dono.
-     * @param dono Novo nome do dono.
-     */
-    public void setDono(String dono) {
-        this.dono = dono;
-    }
-
-    /**
-     * Retorna nome do cachorro.
-     * @return Nome do cachorro.
-     */
-    public String getNomeCao() {
-    	return nomeCao;
-    }
-
-    /**
-     * Atualiza nome do cachorro.
-     * @param nomeCao Novo nome do cachorro.
-     */
-    public void setNomeCao( String nomeCao ) {
-    	this.nomeCao = nomeCao;
     }
 
     /**
@@ -56,5 +22,13 @@ public class Cao extends Animal{
      */
     public void setRaca( String raca ) {
     	this.raca = raca;
+    }
+
+    /**
+     * Cria representação em String da classe.
+     * @return String que representa o cachorro.
+     */
+    public String toString() {
+        return super.toString() + "\n    Raca: "+ raca; 
     }
 }
