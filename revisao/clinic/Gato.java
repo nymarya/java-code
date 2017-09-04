@@ -24,4 +24,12 @@ public class Gato extends Animal {
 	public void setPelagem( String pelagem ) {
 	    this.pelagem = pelagem;
 	}
+
+	/**
+     * Cria representação em String da classe.
+     * @return String que representa o gato.
+     */
+    public String toString() {
+        return super.toString() + "\n    Pelagem: "+ pelagem; 
+    }
 }
