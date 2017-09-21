@@ -56,6 +56,15 @@ public class Carro extends ProdutoDuravel {
 	public void setCor( String cor ) { 
 		this.cor = cor;
 	}
+
+	/**
+	 * Imprime detalhes sobre produto.
+	 */
+	public void print() {
+		super.print();
+		System.out.println("Velocidade média: " + velocidade + " km/h");
+		System.out.println("Cor: " + cor);
+	}
 	
 	/**
 	 * Verifica se produto é eletro eletronico.

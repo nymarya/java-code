@@ -69,7 +69,4 @@ public abstract class ProdutoNaoDuravel extends Produto {
 	 */
 	public abstract boolean estaValido( LocalDate data);
 	
-	public boolean foiVendido() {
-		return true;
-	}
 }

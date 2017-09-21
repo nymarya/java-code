@@ -77,6 +77,16 @@ public class Celular extends ProdutoDuravel {
 	}
 
 	/**
+	 * Imprime detalhes sobre produto.
+	 */
+	public void print() {
+		super.print();
+		System.out.println("Capacidade de armazenamento: " + capacidade);
+		System.out.println("Câmera: " + megapixelsCamera + "MP");
+		System.out.println("Cor: " + cor);
+	}
+
+	/**
 	 * Verifica se produto é eletro eletronico.
 	 * @return Verdadeiro se produto é eletro eletronico.
 	 */

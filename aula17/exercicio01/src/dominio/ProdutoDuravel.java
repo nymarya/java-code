@@ -67,7 +67,7 @@ public abstract class ProdutoDuravel extends Produto{
 	
 	public abstract boolean ehEletro();
 	
-	public boolean foiVendido() {
+	public boolean estaDisponivel() {
 		return true;
 	}
 }

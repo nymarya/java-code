@@ -39,6 +39,14 @@ public class Refrigerante extends ProdutoNaoDuravel {
     public void setMililitros( int mililitros ) {
 	   this.mililitros = mililitros;
     }
+
+    /**
+     * Imprime detalhes sobre produto.
+     */
+    public void print() {
+        super.print();
+        System.out.println(mililitros + " mL");
+    }
     
     /**
 	 * Verifica se produto esta dentro da data de validade.
@@ -46,4 +54,11 @@ public class Refrigerante extends ProdutoNaoDuravel {
 	public boolean estaValido( LocalDate data) {
 		return super.getDataValidade().isBefore(data);
 	}
+
+    /**
+     * Verifica se o produto está disponível para a venda.
+     */
+    public boolean estaDisponivel(){
+        return this.estaValido(LocalDate.now());
+    }
 }

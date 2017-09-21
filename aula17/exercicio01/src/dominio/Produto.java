@@ -140,6 +140,6 @@ public abstract class Produto {
 	 * 
 	 * @return
 	 */
-	public abstract boolean foiVendido();
+	public abstract boolean estaDisponivel();
 
 }

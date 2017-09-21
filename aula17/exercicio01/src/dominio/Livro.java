@@ -57,6 +57,15 @@ public class Livro extends ProdutoDuravel {
 	public void setAutor( String autor ) { 
 		this.autor = autor;
 	}
+
+	/**
+	 * Imprime detalhes sobre produto.
+	 */
+	public void print() {
+		super.print();
+		System.out.println("Edição: " + edicao);
+		System.out.println("Autor: " + autor);
+	}
 	
 	/**
 	 * Verifica se produto é eletro eletronico.

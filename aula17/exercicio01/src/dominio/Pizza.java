@@ -58,6 +58,14 @@ public class Pizza extends ProdutoNaoDuravel {
     public void setBordaRecheada( boolean bordaRecheada) {
             this.bordaRecheada = bordaRecheada;
     }
+
+    /**
+     * Imprime detalhes sobre produto.
+     */
+    public void print() {
+        super.print();
+        System.out.println("Número de fatias: " + fatias);
+    }
     
     /**
 	 * Verifica se produto esta dentro da data de validade.
@@ -65,4 +73,11 @@ public class Pizza extends ProdutoNaoDuravel {
 	public boolean estaValido( LocalDate data) {
 		return super.getDataValidade().isBefore(data);
 	}
+
+    /**
+     * Verifica se o produto está disponível para a venda.
+     */
+    public boolean estaDisponivel(){
+        return this.estaValido(LocalDate.now());
+    }
 }
