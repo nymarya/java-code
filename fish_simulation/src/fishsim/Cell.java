@@ -3,8 +3,8 @@ import java.util.*;
 
 /**
  * Represent a single location in the ocean
- * @author jdb
- * @version 28/11/2008
+ * @author Mayra Dantas de Azevedo
+ * @version 08/10/2017
  */
 public class Cell implements Comparable<Cell>
 {
@@ -73,11 +73,11 @@ public class Cell implements Comparable<Cell>
     
     /**
      * Return an array of cells in a rectangle surrounding this cell. Cells
-     * are included if there row and collumn distance from here are both
+     * are included if there row and column distance from here are both
      * less than or equal to r
      * @param r the maximum distance from here of cells returned.
-     * @param empty if true only empty cessl are returned
-     * @return array of neighbouring cells
+     * @param empty if true only empty cells are returned
+     * @return array of neighboring cells
      */
     public Cell[] neighbours(int r, boolean empty)
     {
@@ -140,7 +140,7 @@ public class Cell implements Comparable<Cell>
     }
     
     /**
-     * Set the plancton level at this locatopn
+     * Set the plancton level at this location
      * @param p the new plancton level
      */
     public void setPlancton(double p)

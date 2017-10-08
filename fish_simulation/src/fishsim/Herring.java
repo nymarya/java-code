@@ -60,7 +60,7 @@ public class Herring extends Fish {
 			return;
 		}
 
-		// look for the neighbouring cell with the most plancton
+		// look for the neighboring cell with the most plancton
 		// and no other fish
 		Cell bestNeighbour = null;
 		Cell cells[] = cell.neighbours(1);
@@ -73,7 +73,7 @@ public class Herring extends Fish {
 		if (bestNeighbour == null)
 			return;
 
-		// Either spawn into the neighbouring cell or if we can't
+		// Either spawn into the neighboring cell or if we can't
 		// breed, move into it.
 		if (weight >= breedWeight && age > breedAge)
 		{

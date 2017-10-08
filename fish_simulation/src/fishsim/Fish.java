@@ -74,7 +74,7 @@ public abstract class Fish
 
 	/**
 	 * Mutator
-	 * @param weight new wightn of this fish
+	 * @param weight New weight of this fish
 	 */
 	public void setWeight(double weight)
 	{
