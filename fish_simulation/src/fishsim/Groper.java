@@ -1,5 +1,7 @@
 package fishsim;
 
+import java.util.List;
+
 /**
  * Blue groper fish class
  * @author jdb
@@ -26,5 +28,29 @@ public class Groper extends Predator {
     {
         return cell.createFish("groper");
     }
+
+	@Override
+	public void eat(List<Cell> neighborhood) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAlive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void move(Cell current, List<Cell> neighborhood) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void breed(List<Cell> neighborhood) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

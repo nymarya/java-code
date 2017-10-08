@@ -14,7 +14,7 @@ public class Simulator
     public static void main(String[] args) 
     {
         Simulator sim = new Simulator(50, 60);
-        sim.run(1000000);
+        sim.run(10);
     }
     
     /**

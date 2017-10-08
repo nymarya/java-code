@@ -1,5 +1,7 @@
 package fishsim;
 
+import java.util.List;
+
 public class Shark extends Predator {
         
         public Shark(Cell cell, FishParams params)
@@ -12,4 +14,28 @@ public class Shark extends Predator {
         {
             return cell.createFish("shark");
         }
+
+		@Override
+		public void eat(List<Cell> neighborhood) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public boolean isAlive() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void move(Cell current, List<Cell> neighborhood) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void breed(List<Cell> neighborhood) {
+			// TODO Auto-generated method stub
+			
+		}
 }
