@@ -61,7 +61,7 @@ public class Ocean
     }
     
     /**
-     * Put the ocean through one iteraction of the simulator
+     * Put the ocean through one iteration of the simulator
      * @param step number of this iteration
      */
     public void act(int step) {

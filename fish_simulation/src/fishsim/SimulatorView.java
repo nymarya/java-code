@@ -1,6 +1,8 @@
 package fishsim;
 import java.awt.*;
 import java.awt.event.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.HashMap;
 
@@ -52,7 +54,78 @@ public class SimulatorView extends JFrame
         oceanView = new OceanView(height, width);
 
         Container contents = getContentPane();
-        contents.add(stepLabel, BorderLayout.NORTH);
+        
+        JPanel pnlButtons = new JPanel(new GridBagLayout());
+		
+		GridBagConstraints c = new GridBagConstraints();
+		c.weighty = 1;
+		c.weightx = 0.1;
+		c.anchor = GridBagConstraints.FIRST_LINE_END;
+		
+		
+	    c.gridx = 0;
+	    c.gridy = 0;
+	    c.weightx = 0.0;
+	    c.weighty = 1.0;
+        c.insets = new Insets(10,10, 0, 0);
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+	    JButton btnPlay = new JButton();
+	    try {
+			Image img = ImageIO.read(getClass().getResource("/resources/ic_play.png"));
+			btnPlay.setIcon(new ImageIcon(img));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+	    //c.insets = new Insets(10,0,10,0);
+		pnlButtons.add(btnPlay, c);
+		
+		c.gridx = 1;
+		c.gridy = 0; 
+		c.weightx = 0.0;
+		c.weighty = 1.0;
+		c.insets = new Insets(10,10,0,0);
+		JButton btnPause = new JButton();
+		try {
+			Image img = ImageIO.read(getClass().getResource("/resources/ic_pause.png"));
+			btnPause.setIcon(new ImageIcon(img));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		
+		btnPause.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Image img = ImageIO.read(getClass().getResource("/resources/ic_play.png"));
+					btnPause.setIcon(new ImageIcon(img));
+				} catch (Exception ex) {
+					System.out.println(ex);
+				}
+			}
+		});
+		
+		pnlButtons.add(btnPause, c);
+		
+		c.gridx = 2;
+		c.gridy = 0; 
+		c.weightx = 0.0;
+		c.weighty = 1.0;
+		c.insets = new Insets(10,10,10,0);
+		c.gridwidth = 2;
+		JButton btnResume = new JButton();
+		try {
+			Image img = ImageIO.read(getClass().getResource("/resources/ic_pause.png"));
+			btnResume.setIcon(new ImageIcon(img));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		pnlButtons.add(btnResume, c);
+	    
+	    //add(pnlButtons, BorderLayout.SOUTH);
+		
+        
+	    contents.add(pnlButtons, BorderLayout.NORTH);
+        //contents.add(stepLabel, BorderLayout.NORTH);
         contents.add(oceanView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
         pack();

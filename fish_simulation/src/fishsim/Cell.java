@@ -23,8 +23,8 @@ public class Cell implements Comparable<Cell>
     
     /**
      * Compare the status of the fish in a pair of cells
-     * Used when sorting neighbouring cells to decide which fish
-     * to eac first
+     * Used when sorting neighboring cells to decide which fish
+     * to eat first
      * @param cell
      * @return
      */
