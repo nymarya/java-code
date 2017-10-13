@@ -1,11 +1,25 @@
 package fishsim;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * (Fill in description and author info here)
  */
 
-public class Simulator
+public class Simulator extends JFrame
 {
     private Ocean ocean;
     private SimulatorView simView;
@@ -39,6 +53,9 @@ public class Simulator
         simView.setColor(Herring.class, Color.red);
         simView.setColor(Groper.class, Color.blue);
         simView.setColor(Shark.class, Color.black);
+        
+        //Draw control panel
+        draw();
     }
     
     /**
@@ -53,5 +70,95 @@ public class Simulator
             ocean.act(i);
             simView.showStatus(i, ocean);
         }
+    }
+    
+    /**
+     * Draw control panel.
+     */
+    public void draw() {
+    	Container contents = simView.getContentPane();
+        
+        JPanel pnlButtons = new JPanel(new GridBagLayout());
+		
+		GridBagConstraints c = new GridBagConstraints();
+		c.weighty = 1;
+		c.weightx = 0.1;
+		c.anchor = GridBagConstraints.FIRST_LINE_END;
+		
+		
+	    c.gridx = 0;
+	    c.gridy = 0;
+	    c.weightx = 0.0;
+	    c.weighty = 1.0;
+        c.insets = new Insets(10,10, 0, 0);
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+	    JButton btnPlay = new JButton();
+	    try {
+			Image img = ImageIO.read(getClass().getResource("/resources/ic_play.png"));
+			btnPlay.setIcon(new ImageIcon(img));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+	    //c.insets = new Insets(10,0,10,0);
+	    
+	    btnPlay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Image img = ImageIO.read(getClass().getResource("/resources/ic_play.png"));
+					btnPlay.setIcon(new ImageIcon(img));
+				} catch (Exception ex) {
+					System.out.println(ex);
+				}
+			}
+		});
+		pnlButtons.add(btnPlay, c);
+		
+		c.gridx = 1;
+		c.gridy = 0; 
+		c.weightx = 0.0;
+		c.weighty = 1.0;
+		c.insets = new Insets(10,10,0,0);
+		JButton btnPause = new JButton();
+		try {
+			Image img = ImageIO.read(getClass().getResource("/resources/ic_pause.png"));
+			btnPause.setIcon(new ImageIcon(img));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		
+		btnPause.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Image img = ImageIO.read(getClass().getResource("/resources/ic_play.png"));
+					btnPause.setIcon(new ImageIcon(img));
+				} catch (Exception ex) {
+					System.out.println(ex);
+				}
+			}
+		});
+		
+		pnlButtons.add(btnPause, c);
+		
+		c.gridx = 2;
+		c.gridy = 0; 
+		c.weightx = 0.0;
+		c.weighty = 1.0;
+		c.insets = new Insets(10,10,10,0);
+		c.gridwidth = 2;
+		JButton btnResume = new JButton();
+		try {
+			Image img = ImageIO.read(getClass().getResource("/resources/ic_pause.png"));
+			btnResume.setIcon(new ImageIcon(img));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		pnlButtons.add(btnResume, c);
+		
+        
+	    contents.add(pnlButtons, BorderLayout.NORTH);
+	    simView.pack();
+	    simView.setVisible(true);
     }
 }
