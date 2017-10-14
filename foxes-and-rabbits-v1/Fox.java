@@ -9,7 +9,7 @@ import java.util.Random;
  * @author Mayra D. de Azevedo
  * @version 2017
  */
-public class Fox extends Animal implements Actor
+public class Fox extends Animal 
 {
     // Characteristics shared by all foxes (static fields).
     
@@ -57,6 +57,7 @@ public class Fox extends Animal implements Actor
      * @param field The field currently occupied.
      * @param newFoxes A list to add newly born foxes to.
      */
+    @Override
     public void act(List<Actor> newFoxes)
     {
         super.incrementAge();

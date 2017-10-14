@@ -8,7 +8,7 @@ import java.util.Random;
  * @author Mayra D. Azevedo
  * @version 2017
  */
-public class Rabbit extends Animal implements Actor
+public class Rabbit extends Animal 
 {
     // Characteristics shared by all rabbits (static fields).
 
