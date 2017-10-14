@@ -5,10 +5,10 @@ import java.util.Random;
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
  * 
- * @author David J. Barnes and Michael Kolling
- * @version 2008.03.30
+ * @author Mayra D. Azevedo
+ * @version 2017
  */
-public class Rabbit
+public class Rabbit extends Animal implements Actor
 {
     // Characteristics shared by all rabbits (static fields).
 
@@ -20,19 +20,8 @@ public class Rabbit
     private static final double BREEDING_PROBABILITY = 0.15;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
-    // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
-    
-    // The rabbit's age.
-    private int age;
-    // Whether the rabbit is alive or not.
-    private boolean alive;
-    // The rabbit's position.
-    private Location location;
-    // The field occupied.
-    private Field field;
 
     /**
      * Create a new rabbit. A rabbit may be created with age
@@ -44,13 +33,7 @@ public class Rabbit
      */
     public Rabbit(boolean randomAge, Field field, Location location)
     {
-        age = 0;
-        alive = true;
-        this.field = field;
-        setLocation(location);
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-        }
+        super(field, location);
     }
     
     /**
@@ -58,13 +41,14 @@ public class Rabbit
      * around. Sometimes it will breed or die of old age.
      * @param newRabbits A list to add newly born rabbits to.
      */
-    public void run(List<Rabbit> newRabbits)
+    @Override
+    public void act(List<Actor> newRabbits)
     {
-        incrementAge();
-        if(alive) {
+        super.incrementAge();
+        if(isAlive()) {
             giveBirth(newRabbits);            
             // Try to move into a free location.
-            Location newLocation = field.freeAdjacentLocation(location);
+            Location newLocation = getField().freeAdjacentLocation(getLocation());
             if(newLocation != null) {
                 setLocation(newLocation);
             }
@@ -74,62 +58,15 @@ public class Rabbit
             }
         }
     }
-    
-    /**
-     * Check whether the rabbit is alive or not.
-     * @return true if the rabbit is still alive.
-     */
-    public boolean isAlive()
-    {
-        return alive;
-    }
-    
-    /**
-     * Indicate that the rabbit is no longer alive.
-     * It is removed from the field.
-     */
-    public void setDead()
-    {
-        alive = false;
-        if(location != null) {
-            field.clear(location);
-            location = null;
-            field = null;
-        }
-    }
-    
-    /**
-     * Return the rabbit's location.
-     * @return The rabbit's location.
-     */
-    public Location getLocation()
-    {
-        return location;
-    }
-    
-    /**
-     * Place the rabbit at the new location in the given field.
-     * @param newLocation The rabbit's new location.
-     */
-    private void setLocation(Location newLocation)
-    {
-        if(location != null) {
-            field.clear(location);
-        }
-        location = newLocation;
-        field.place(this, newLocation);
-    }
 
+    
     /**
-     * Increase the age.
-     * This could result in the rabbit's death.
+     * Return the max age of the rabbit.
+     * @return the max age.
      */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
+    @Override
+    protected int getMaxAge() {
+    	return MAX_AGE;
     }
     
     /**
@@ -137,11 +74,12 @@ public class Rabbit
      * New births will be made into free adjacent locations.
      * @param newRabbits A list to add newly born rabbits to.
      */
-    private void giveBirth(List<Rabbit> newRabbits)
+    private void giveBirth(List<Actor> newRabbits)
     {
         // New rabbits are born into adjacent locations.
         // Get a list of adjacent free locations.
-        List<Location> free = field.getFreeAdjacentLocations(location);
+    	Field field = super.getField();
+        List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
@@ -149,27 +87,32 @@ public class Rabbit
             newRabbits.add(young);
         }
     }
-        
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
+     * Return the breeding age of the rabbit.
+     * @return the breeding age.
      */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
+    @Override
+    protected int getBreedingAge() {
+    	return BREEDING_AGE;
     }
+    
+    /**
+	 * Return breeding probability of the rabbit.
+	 * @return the breeding probability.
+	 */
+    @Override
+    protected double getBreedingProbability() {
+    	return BREEDING_PROBABILITY;
+    }
+    
+    /**
+	 * Return max litter size of the animal.
+	 * @return the max litter size.
+	 */
+    @Override
+    protected int getMaxLitterSize() {
+    	return MAX_LITTER_SIZE;
+    }
+    
 }
