@@ -28,6 +28,7 @@ public class Simulator extends JFrame
 	private int speed;
 	private boolean paused;
 	private int steps;
+	private int currentStep;
 
 
 	public static void main(String[] args) 
@@ -62,6 +63,7 @@ public class Simulator extends JFrame
 		//Init params
 		paused = true;
 		speed = 512;
+		currentStep = 0;
 
 		//Draw control panel
 		draw();
@@ -115,7 +117,6 @@ public class Simulator extends JFrame
 		try {
 			Image img = ImageIO.read(getClass().getResource("/resources/ic_play.png"));
 			btnPlay.setIcon(new ImageIcon(img));
-
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
@@ -130,6 +131,8 @@ public class Simulator extends JFrame
 					btnPlay.setIcon(new ImageIcon(img));
 					txtSteps.setEnabled(false);
 					pause(!paused);
+					
+					txtSteps.setVisible(false);
 				} catch (Exception ex) {
 					System.out.println(ex);
 				}
@@ -246,10 +249,10 @@ public class Simulator extends JFrame
 		public void run() {
 			try {
 
-				for(int i = 0; i < steps; i++) {
+				while(currentStep < steps) {
 
 					checkState();
-					Simulator.this.run(i);
+					Simulator.this.run(currentStep++);
 					Thread.sleep(speed);
 				}
 			} catch (InterruptedException e) {

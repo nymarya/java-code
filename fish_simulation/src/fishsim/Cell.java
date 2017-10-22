@@ -10,6 +10,15 @@ public class Cell implements Comparable<Cell>
 {
     private int row, col;
     private Ocean ocean;
+    
+    //Cell contains fishes and planctons
+    private double initialPlancton = 5.0;
+    private double maxPlancton = 10.0;
+    private double incPlancton = 1.2;
+    
+    FishParams herringParams, groperParams, sharkParams;
+    private Fish fish;
+    private double plancton;
 
     /**
      * Constructor for objects of class Cell
@@ -19,6 +28,7 @@ public class Cell implements Comparable<Cell>
         this.ocean = ocean;
         this.row = row;
         this.col = col;
+        plancton = initialPlancton;
     }
     
     /**
@@ -40,7 +50,16 @@ public class Cell implements Comparable<Cell>
      */
     public Fish createFish(String fishType)
     {
-        return ocean.createFish(this, fishType);
+    	//return ocean.createFish(this, fishType);
+
+    	if (fishType.equals("herring"))
+            fish = new Herring(this, ocean.getHerringParams());
+        if (fishType.equals("groper"))
+            fish =  new Groper(this, ocean.getGroperParams());
+        if (fishType.equals("shark"))
+            fish = new Shark(this, ocean.getSharkParams());
+        return fish;
+        
     }
 
     /**
@@ -92,7 +111,7 @@ public class Cell implements Comparable<Cell>
     			if (empty && ocean.getFishAt(y, x) != null)
     				continue;
     			if (x != col || y != row)
-    				cells[n++] = new Cell(ocean, y, x);
+    				cells[n++] = ocean.getCell(y, x);
     		}
         if (n < cells.length)
             return Arrays.copyOf(cells, n);
@@ -118,7 +137,8 @@ public class Cell implements Comparable<Cell>
      */
     public Fish getFish()
     {
-        return ocean.getFishAt(row, col);
+        //return ocean.getFishAt(row, col);
+    	return fish;
     }
     
     /**
@@ -127,7 +147,9 @@ public class Cell implements Comparable<Cell>
      */
     public void setFish(Fish fish)
     {
-        ocean.setFishAt(fish, row, col);
+    	this.fish = fish;
+        //ocean.setFishAt(fish, row, col);
+        
     }
     
     /**
@@ -136,7 +158,8 @@ public class Cell implements Comparable<Cell>
      */
     public double getPlancton()
     {
-    	return ocean.getPlanctonAt(row, col);
+    	return plancton;
+    	//return ocean.getPlanctonAt(row, col);
     }
     
     /**
@@ -145,7 +168,12 @@ public class Cell implements Comparable<Cell>
      */
     public void setPlancton(double p)
     {
-    	ocean.setPlanctonAt(p, row, col);
+    	//ocean.setPlanctonAt(p, row, col);
+    	plancton = p;
+    }
+    
+    public void increasePlancton() {
+    	plancton = Math.min(plancton * incPlancton, maxPlancton);
     }
     
     /**

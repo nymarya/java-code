@@ -14,8 +14,11 @@ public class Ocean
     
     FishParams herringParams, groperParams, sharkParams;
     private int width, height;
-    private ArrayList<Fish> fishes;
-    private double plancton[];
+    
+    
+    private Cell cells[][];
+    
+    
     
     /**
      * Create a new ocean
@@ -33,12 +36,11 @@ public class Ocean
         this.herringParams = herringParams;
         this.groperParams = groperParams;
         this.sharkParams = sharkParams;
-        fishes = new ArrayList<Fish>(width * height);
-        plancton = new double[width * height];
-        for (int n = 0; n < plancton.length; n++)
-        {
-        	fishes.add(n, null);
-        	plancton[n] = initialPlancton;
+        cells = new Cell[height][width];
+        for(int i = 0; i < height; i++) {
+        	for(int j =0 ; j < width; j++) {
+        		cells[i][j] = new Cell(this, i, j);
+        	}
         }
     }
     
@@ -51,13 +53,15 @@ public class Ocean
      */
     public Fish createFish(Cell cell, String fishType)
     {
-        if (fishType.equals("herring"))
-            return new Herring(cell, herringParams);
-        if (fishType.equals("groper"))
-            return new Groper(cell, groperParams);
-        if (fishType.equals("shark"))
-            return new Shark(cell, sharkParams);
-        return null;
+        //if (fishType.equals("herring"))
+         //   return new Herring(cell, herringParams);
+        //if (fishType.equals("groper"))
+        //    return new Groper(cell, groperParams);
+        //if (fishType.equals("shark"))
+        //    return new Shark(cell, sharkParams);
+        //return null;
+
+    	return cell.createFish(fishType );
     }
     
     /**
@@ -69,32 +73,23 @@ public class Ocean
          * Seed the ocean with new fish occasionally
          */
     	if (step % 100 == 0)
-    		createFish(new Cell(this, 10, 10), "herring");
+    		cells[10][10].createFish("herring");
     	if (step % 100 == 50) {
-    		createFish(new Cell(this, 20, 20), "groper");
-    		createFish(new Cell(this, 40, 40), "shark");
+    		cells[20][20].createFish("groper");
+    		cells[40][40].createFish("shark");
         }
         
         // Act on all the fish
-        Cell cells[] = Cells();
-    	for (int n = 0; n < cells.length; n++)
-    		if (cells[n].getFish() != null)
-    			cells[n].getFish().act(step);
-        // Grow the plancton
-    	for (int n = 0; n < plancton.length; n++)
-    		plancton[n] = Math.min(plancton[n] * incPlancton, maxPlancton);
-    }
-    
-    /**
-     * Get all the cells in the ocean
-     * @return array of cells
-     */
-    public Cell[] Cells()
-    {
-        Cell cells[] = new Cell[width * height];
-        for (int n = 0; n < cells.length; n++)
-            cells[n] = new Cell(this, n / width, n % width);
-        return cells;
+        //Cell cells[] = Cells();
+    	for(int i = 0; i < height; i++) {
+        	for(int j =0 ; j < width; j++) {
+        		if (cells[i][j].getFish() != null) {
+        			cells[i][j].getFish().act(step);
+        		}
+        		
+        		cells[i][j].increasePlancton();
+        	}
+        }
     }
     
     /**
@@ -105,7 +100,8 @@ public class Ocean
      */
     public Fish getFishAt(int row, int col)
     {
-        return fishes.get(width * row + col);
+        //return fishes.get(width * row + col);
+    	return cells[row][col].getFish();
     }
     
     /**
@@ -116,7 +112,8 @@ public class Ocean
      */
     public void setFishAt(Fish fish, int row, int col)
     {
-        fishes.set(width * row + col, fish);
+        //fishes.set(width * row + col, fish);
+    	cells[row][col].setFish(fish);
     }
     
     /**
@@ -127,7 +124,7 @@ public class Ocean
      */
     public double getPlanctonAt(int row, int col)
     {
-    	return plancton[width * row + col];
+    	return cells[row][col].getPlancton();
     }
     
     /**
@@ -138,7 +135,7 @@ public class Ocean
      */
     public void setPlanctonAt(double p, int row, int col)
     {
-    	plancton[width * row + col] = p;
+    	cells[row][col].setPlancton(p);
     }
     
     /**
@@ -156,4 +153,29 @@ public class Ocean
     {
         return width;
     }
+
+	/**
+	 * @return the herringParams
+	 */
+	public FishParams getHerringParams() {
+		return herringParams;
+	}
+
+	/**
+	 * @return the groperParams
+	 */
+	public FishParams getGroperParams() {
+		return groperParams;
+	}
+
+	/**
+	 * @return the sharkParams
+	 */
+	public FishParams getSharkParams() {
+		return sharkParams;
+	}
+	
+	public Cell getCell(int row, int col) {
+		return cells[row][col];
+	}
 }
