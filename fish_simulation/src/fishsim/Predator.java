@@ -78,4 +78,12 @@ public abstract class Predator extends Fish {
         }
 
     }
+    
+    /**
+     * Get safe distance 
+     * @return
+     */
+    public int getDistance() {
+    	return huntDistance;
+    }
 }

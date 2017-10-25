@@ -81,7 +81,11 @@ public class Ocean
         			//cells[i][j].getFish().act(step);
         			Fish fish = cells[i][j].getFish();
         			if(fish.isAlive()) {
+        				//eat
         				
+        				//breed
+        				
+        				//move 
         			}
         		}
         		
@@ -202,24 +206,25 @@ public class Ocean
      * @param empty if true only empty cells are returned
      * @return array of neighboring cells
      */
-    public Cell[] neighbours(int r, int col, int row)
+    public List<Cell> neighbours(int r, Cell cell)
     {
-    	int left = Math.max(0, col - r);
-    	int right = Math.min(width, col + r + 1);
-    	int top = Math.max(0, row - r);
-    	int bottom = Math.min(height, row + r + 1);
-    	Cell cels[] = new Cell[(bottom - top)*(right - left) - 1];
+    	int left = Math.max(0, cell.getCol() - r);
+    	int right = Math.min(width, cell.getCol() + r + 1);
+    	int top = Math.max(0, cell.getRow() - r);
+    	int bottom = Math.min(height, cell.getRow() + r + 1);
+    	List<Cell> neighbours = new ArrayList<Cell>();
     	int n = 0;
     	for (int y = top; y < bottom; y++)
     		for (int x = left; x < right; x++) {
     			if (cells[y][x].getFish() != null)
     				continue;
-    			if (x != col || y != row)
-    				cells[n++] = ocean.getCell(y, x);
+    			if (x != cell.getCol() || y != cell.getRow())
+    				neighbours.add( getCell(y, x) );
     		}
-        if (n < cells.length)
-            return Arrays.copyOf(cells, n);
+       /** if (n < cels.size())
+            return List.copyOf(cels, n);
         else
-            return cells;
+            return cels;**/
+    	return neighbours;
     }
 }

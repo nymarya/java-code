@@ -31,14 +31,9 @@ public class Groper extends Predator {
 
 	@Override
 	public void eat(List<Cell> neighborhood) {
-		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		
 	}
 
 	@Override
@@ -49,7 +44,12 @@ public class Groper extends Predator {
 
 	@Override
 	public void breed(List<Cell> neighborhood) {
-		// TODO Auto-generated method stub
+		Cell c = Cell.random(cell.neighbours(huntDistance, true));
+        if (c != null) {
+            Fish child = spawn(c);
+            child.setWeight(weight / 2);
+            weight /= 2;
+        }
 		
 	}
 

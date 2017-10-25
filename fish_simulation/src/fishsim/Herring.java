@@ -43,8 +43,6 @@ public class Herring extends Fish {
 			return;
 		this.step = step;
 		age++;
-		
-		if( isAlive() )
 
 		// Eat some plancton
 
@@ -140,4 +138,12 @@ public class Herring extends Fish {
 		}
 
 	}
+	
+	/**
+     * Get safe distance 
+     * @return
+     */
+    public int getDistance() {
+    	return 1;
+    }
 }
