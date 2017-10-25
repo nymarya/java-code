@@ -43,24 +43,13 @@ public class Herring extends Fish {
 			return;
 		this.step = step;
 		age++;
+		
+		if( isAlive() )
 
 		// Eat some plancton
-		double p = cell.getPlancton();
-		if (p > planctonEaten) {
-			eat(planctonEaten);
-			p -= planctonEaten;
-		} else {
-			eat(p);
-			p = 0.1; // don't reduce to zero
-		}
-		cell.setPlancton(p);
 
 		// burn some weight and see if we are still viable
 		weight *= weightReduce;
-		if (weight < viableWeight || age > maxAge) {
-			cell.setFish(null);
-			return;
-		}
 
 		// look for the neighboring cell with the most plancton
 		// and no other fish
@@ -88,7 +77,6 @@ public class Herring extends Fish {
 
 	@Override
 	public void eat(List<Cell> neighborhood) {
-		// TODO Auto-generated method stub
 		// Eat some plancton
 		double p = cell.getPlancton();
 		if (p > planctonEaten) {
@@ -102,15 +90,24 @@ public class Herring extends Fish {
 
 	}
 
+	/**
+	 * Checks if fish is alive.
+	 * @return True if fish is alive, false otherwise.
+	 */
 	@Override
 	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
+		age++;
+		return age < maxAge && weight >= viableWeight;
 	}
 
+	/**
+	 * Move fish to another cell.
+	 * @param current Cell that contains the fish
+	 * @param neighborhood List of cells that can be occupied.
+	 */
 	@Override
 	public void move(Cell current, List<Cell> neighborhood) {
-		
+
 		Collections.shuffle(neighborhood);
 		for (Cell c: neighborhood) {
 			if (c.getFish() != null && c.getPlancton() >  current.getPlancton()) {
@@ -120,9 +117,13 @@ public class Herring extends Fish {
 				break;
 			}
 		}
-		
+
 	}
 
+	/**
+	 * Fish breed and spawn to neighbor cell.
+	 * @param neighborhood List of cells that can be occupied.
+	 */
 	@Override
 	public void breed(List<Cell> neighborhood) {
 		if (weight >= breedWeight && age > breedAge)
@@ -136,8 +137,7 @@ public class Herring extends Fish {
 				}
 			}
 			weight *= 0.6;
-		} else if (bestNeighbour.getPlancton() > cell.getPlancton())
-			move(bestNeighbour);
+		}
 
 	}
 }
