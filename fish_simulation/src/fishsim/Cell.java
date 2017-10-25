@@ -29,6 +29,7 @@ public class Cell implements Comparable<Cell>
         this.row = row;
         this.col = col;
         plancton = initialPlancton;
+        this.fish = null;
     }
     
     /**
@@ -147,6 +148,8 @@ public class Cell implements Comparable<Cell>
      */
     public void setFish(Fish fish)
     {
+    	if(fish != null)
+    		return;
     	this.fish = fish;
         //ocean.setFishAt(fish, row, col);
         
@@ -186,4 +189,14 @@ public class Cell implements Comparable<Cell>
             return null;
         return cells[(int)(cells.length * Math.random())];
     }
+    
+    /**
+     * Reset cell to initial state.
+     */
+    public void reset() {
+		if(fish != null)
+			fish = null;
+		
+		plancton = initialPlancton;
+	}
 }

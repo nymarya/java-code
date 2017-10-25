@@ -7,17 +7,10 @@ import java.util.*;
 public class Ocean
 {
     // Configurable parameters
-    // Plancton
-    private double initialPlancton = 5.0;
-    private double maxPlancton = 10.0;
-    private double incPlancton = 1.2;
-    
     FishParams herringParams, groperParams, sharkParams;
     private int width, height;
     
-    
     private Cell cells[][];
-    
     
     
     /**
@@ -84,7 +77,12 @@ public class Ocean
     	for(int i = 0; i < height; i++) {
         	for(int j =0 ; j < width; j++) {
         		if (cells[i][j].getFish() != null) {
-        			cells[i][j].getFish().act(step);
+        			//System.out.println("a "+ i + " " + j+" ");
+        			//cells[i][j].getFish().act(step);
+        			Fish fish = cells[i][j].getFish();
+        			if(fish.isAlive()) {
+        				
+        			}
         		}
         		
         		cells[i][j].increasePlancton();
@@ -175,7 +173,53 @@ public class Ocean
 		return sharkParams;
 	}
 	
+	/**
+	 * Return cell at given location
+	 * @param row Row of cell
+	 * @param col Column of cell
+	 * @return Cell at given locationv
+	 */
 	public Cell getCell(int row, int col) {
 		return cells[row][col];
 	}
+	
+	/**
+	 * Reset ocean to initial state.
+	 */
+	public void reset() {
+		for(int i = 0; i < height; i++) {
+        	for(int j =0 ; j < width; j++) {
+        		cells[i][j].reset();
+        	}
+        }
+	}
+	
+	/**
+     * Return an array of cells in a rectangle surrounding this cell. Cells
+     * are included if there row and column distance from here are both
+     * less than or equal to r
+     * @param r the maximum distance from here of cells returned.
+     * @param empty if true only empty cells are returned
+     * @return array of neighboring cells
+     */
+    public Cell[] neighbours(int r, int col, int row)
+    {
+    	int left = Math.max(0, col - r);
+    	int right = Math.min(width, col + r + 1);
+    	int top = Math.max(0, row - r);
+    	int bottom = Math.min(height, row + r + 1);
+    	Cell cels[] = new Cell[(bottom - top)*(right - left) - 1];
+    	int n = 0;
+    	for (int y = top; y < bottom; y++)
+    		for (int x = left; x < right; x++) {
+    			if (cells[y][x].getFish() != null)
+    				continue;
+    			if (x != col || y != row)
+    				cells[n++] = ocean.getCell(y, x);
+    		}
+        if (n < cells.length)
+            return Arrays.copyOf(cells, n);
+        else
+            return cells;
+    }
 }

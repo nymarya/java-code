@@ -1,6 +1,8 @@
 package fishsim;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The Herring fish class
@@ -87,6 +89,16 @@ public class Herring extends Fish {
 	@Override
 	public void eat(List<Cell> neighborhood) {
 		// TODO Auto-generated method stub
+		// Eat some plancton
+		double p = cell.getPlancton();
+		if (p > planctonEaten) {
+			eat(planctonEaten);
+			p -= planctonEaten;
+		} else {
+			eat(p);
+			p = 0.1; // don't reduce to zero
+		}
+		cell.setPlancton(p);
 
 	}
 
@@ -98,13 +110,34 @@ public class Herring extends Fish {
 
 	@Override
 	public void move(Cell current, List<Cell> neighborhood) {
-		// TODO Auto-generated method stub
-
+		
+		Collections.shuffle(neighborhood);
+		for (Cell c: neighborhood) {
+			if (c.getFish() != null && c.getPlancton() >  current.getPlancton()) {
+				Fish fish = current.getFish();
+				current.setFish(null);
+				c.setFish(fish);
+				break;
+			}
+		}
+		
 	}
 
 	@Override
 	public void breed(List<Cell> neighborhood) {
-		// TODO Auto-generated method stub
+		if (weight >= breedWeight && age > breedAge)
+		{
+			Collections.shuffle(neighborhood);
+			for (Cell c: neighborhood) {
+				if (c.getFish() != null) {
+					Fish child = c.createFish("herring");
+					child.setWeight(weight * 0.4);
+					break;
+				}
+			}
+			weight *= 0.6;
+		} else if (bestNeighbour.getPlancton() > cell.getPlancton())
+			move(bestNeighbour);
 
 	}
 }
