@@ -108,7 +108,10 @@ public abstract class Fish
 	 * Check whether fish is alive.
 	 * @return True if fish is alive, false otherwise.
 	 */
-	public abstract boolean isAlive();
+	public boolean isAlive() {
+		age++;
+		return age < maxAge && weight >= viableWeight;
+	}
 	
 	/**
 	 * Move fish from the current cell to a neighbor cell.
@@ -122,5 +125,13 @@ public abstract class Fish
 	 * @param neighborhood
 	 */
 	public abstract void breed(List<Cell> neighborhood);
+	
+	/**
+	 * Check if fish can breed
+	 * @return True if fish can breed, false otherwise.
+	 */
+	public boolean canBreed() {
+		return weight > breedWeight && age >= breedAge;
+	}
 	
 }
