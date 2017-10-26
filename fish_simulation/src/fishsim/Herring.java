@@ -76,67 +76,59 @@ public class Herring extends Fish {
 	@Override
 	public void eat(List<Cell> neighborhood) {
 		// Eat some plancton
-		double p = cell.getPlancton();
-		if (p > planctonEaten) {
-			eat(planctonEaten);
-			p -= planctonEaten;
-		} else {
-			eat(p);
-			p = 0.1; // don't reduce to zero
-		}
-		cell.setPlancton(p);
-
-	}
-
-	/**
-	 * Checks if fish is alive.
-	 * @return True if fish is alive, false otherwise.
-	 */
-	@Override
-	public boolean isAlive() {
-		age++;
-		return age < maxAge && weight >= viableWeight;
-	}
-
-	/**
-	 * Move fish to another cell.
-	 * @param current Cell that contains the fish
-	 * @param neighborhood List of cells that can be occupied.
-	 */
-	@Override
-	public void move(Cell current, List<Cell> neighborhood) {
-
-		Collections.shuffle(neighborhood);
-		for (Cell c: neighborhood) {
-			if (c.getFish() != null && c.getPlancton() >  current.getPlancton()) {
-				Fish fish = current.getFish();
-				current.setFish(null);
-				c.setFish(fish);
-				break;
+		for(Cell c : neighborhood) {
+			
+			double p = c.getPlancton();
+			if (p > planctonEaten) {
+				eat(planctonEaten);
+				p -= planctonEaten;
+			} else {
+				eat(p);
+				p = 0.1; // don't reduce to zero
 			}
+			c.setPlancton(p);
 		}
+		
 
 	}
-
+	
 	/**
 	 * Fish breed and spawn to neighbor cell.
 	 * @param neighborhood List of cells that can be occupied.
 	 */
 	@Override
 	public void breed(List<Cell> neighborhood) {
-		if (weight >= breedWeight && age > breedAge)
-		{
-			Collections.shuffle(neighborhood);
-			for (Cell c: neighborhood) {
-				if (c.getFish() != null) {
-					Fish child = c.createFish("herring");
-					child.setWeight(weight * 0.4);
-					break;
-				}
+		Collections.shuffle(neighborhood);
+		for (Cell c: neighborhood) {
+			if (c.getFish() == null) {
+				Fish child = c.createFish("herring");
+				System.out.println("cria em " + c.getCol() + " " + c.getRow());
+				child.setWeight(weight * 0.4);
+				break;
 			}
-			weight *= 0.6;
 		}
+		weight *= 0.6;
 
+	}
+	
+	/**
+	 * Move fish from the current cell to a neighbor cell.
+	 * @param current Cell containing the fish.
+	 * @param neighborhood Neighbor cells. 
+	 */
+	public void move(Cell current, List<Cell> neighborhood) {
+		Collections.shuffle(neighborhood);
+		for (Cell c: neighborhood) {
+			System.out.println("plan: " + c.getPlancton() );
+			System.out.println("planc: " + current.getPlancton() );
+			if (c.getFish() == null && c.getPlancton() >=  current.getPlancton()) {
+				Fish fish = current.getFish();
+				current.setFish(null);
+				c.setFish(fish);
+				System.out.println("moveu para " + c.getCol() + " " + c.getRow() );
+				break;
+			}
+		}
 	}
 	
 	/**

@@ -1,5 +1,6 @@
 package fishsim;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Shark extends Predator {
@@ -15,27 +16,48 @@ public class Shark extends Predator {
             return cell.createFish("shark");
         }
 
-		@Override
-		public void eat(List<Cell> neighborhood) {
-			// TODO Auto-generated method stub
-			
-		}
+        /**
+         * Eat fish in the neighborhood.
+         * @param neighborhood List of cells that may contain food.
+         */
+    	@Override
+    	public void eat(List<Cell> neighborhood) {
+    		// Eat as many fish as are in the neighborhood
+            double eaten = 0.0;
+            for (Cell c : neighborhood) {
+                if (c.getStatus() == 0) {
+                    break;
+                }
 
-		@Override
-		public boolean isAlive() {
-			// TODO Auto-generated method stub
-			return false;
-		}
+                //Sharks are not cannibal (in this simulation)
+                if (c.getStatus() < status && !(c.getFish() instanceof Shark)) {
+                    double w = c.getFish().getWeight();
+                    eat(w);
+                    c.setFish(null);
+                    eaten += w;
+                    if (eaten >= maxEat)
+                        break;
+                }
+            }
+    		
+    		
+    	}
 
-		@Override
-		public void move(Cell current, List<Cell> neighborhood) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void breed(List<Cell> neighborhood) {
-			// TODO Auto-generated method stub
-			
-		}
+    	/**
+    	 * Shark breed and spawn to a neighbor cell.
+    	 * @param neighborhood List of cells that can be occupied.
+    	 */
+    	@Override
+    	public void breed(List<Cell> neighborhood) {
+    		Collections.shuffle(neighborhood);
+    		for (Cell c: neighborhood) {
+    			if (c.getFish() == null) {
+    				Fish child = c.createFish("shark");
+    				child.setWeight(weight /2);
+    				weight /= 2;
+    				break;
+    			}
+    		}
+    		
+    	}
 }

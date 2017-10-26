@@ -1,5 +1,6 @@
 package fishsim;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Manage the rectangle of cells representing an ocean
@@ -76,20 +77,29 @@ public class Ocean
         //Cell cells[] = Cells();
     	for(int i = 0; i < height; i++) {
         	for(int j =0 ; j < width; j++) {
+        		cells[i][j].increasePlancton();
         		if (cells[i][j].getFish() != null) {
         			//System.out.println("a "+ i + " " + j+" ");
         			//cells[i][j].getFish().act(step);
         			Fish fish = cells[i][j].getFish();
         			if(fish.isAlive()) {
-        				//eat
+        				List<Cell> neighborhood = neighbours(fish.getDistance(), cells[i][j]);
+        				// Eat some
+        				fish.eat(neighborhood);
+        				fish.updateWeigth();
         				
-        				//breed
-        				
-        				//move 
+        				// Either spawn into the neighboring cell or if we can't
+        				// breed, move into it.
+        				if(fish.canBreed() ) {
+        					
+        					fish.breed(neighborhood);
+        				} else {
+        					System.out.println("se mexa");
+        					fish.move(cells[i][j], neighborhood);
+        				}
         			}
         		}
         		
-        		cells[i][j].increasePlancton();
         	}
         }
     }
@@ -216,8 +226,8 @@ public class Ocean
     	int n = 0;
     	for (int y = top; y < bottom; y++)
     		for (int x = left; x < right; x++) {
-    			if (cells[y][x].getFish() != null)
-    				continue;
+    			//if (cells[y][x].getFish() != null)
+    			//	continue;
     			if (x != cell.getCol() || y != cell.getRow())
     				neighbours.add( getCell(y, x) );
     		}

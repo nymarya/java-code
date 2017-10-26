@@ -14,7 +14,7 @@ public abstract class Predator extends Fish {
     /**
      * Construct a new predator
      * @param cell location
-     * @param params prameters
+     * @param params parameters
      */
     public Predator(Cell cell, FishParams params) {
         super(cell, params);
@@ -34,7 +34,7 @@ public abstract class Predator extends Fish {
         this.step = step;
         this.age++;
 
-        // Eat as many fish as are in the neighbourhood
+        // Eat as many fish as are in the neighborhood
         // in decreasing order by status
         Cell neighbours[] = cell.neighbours(huntDistance);
         Arrays.sort(neighbours);
@@ -71,7 +71,7 @@ public abstract class Predator extends Fish {
                 weight /= 2;
             }
         } else {
-            // Otherwise just swim to a neighbouring empty cell
+            // Otherwise just swim to a neighboring empty cell
             Cell c = Cell.random(cell.neighbours(5, true));
             if (c != null)
                 move(c);

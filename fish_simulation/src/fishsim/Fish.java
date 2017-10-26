@@ -1,5 +1,6 @@
 package fishsim;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -118,7 +119,18 @@ public abstract class Fish
 	 * @param current Cell containing the fish.
 	 * @param neighborhood Neighbor cells. 
 	 */
-	public abstract void move(Cell current, List<Cell> neighborhood);
+	public void move(Cell current, List<Cell> neighborhood) {
+		Collections.shuffle(neighborhood);
+		for (Cell c: neighborhood) {
+			if (c.getFish() != null && c.getPlancton() >  current.getPlancton()) {
+				Fish fish = current.getFish();
+				current.setFish(null);
+				c.setFish(fish);
+				System.out.println("moveu para " + c.getCol() + " " + c.getRow() );
+				break;
+			}
+		}
+	}
 	
 	/**
 	 * Populate a neighbor cell with a new fish.
@@ -133,5 +145,20 @@ public abstract class Fish
 	public boolean canBreed() {
 		return weight > breedWeight && age >= breedAge;
 	}
+	
+	/**
+	 * Update wigth of the fish
+	 */
+	public void updateWeigth() {
+		weight *= weightReduce;
+	}
+	
+	/**
+     * Get safe distance 
+     * @return
+     */
+    public int getDistance() {
+    	return 1;
+    }
 	
 }

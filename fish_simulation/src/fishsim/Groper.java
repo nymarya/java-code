@@ -1,5 +1,7 @@
 package fishsim;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,27 +31,48 @@ public class Groper extends Predator {
         return cell.createFish("groper");
     }
 
+    /**
+     * Eat fish.
+     * @param neighborhood List of cells that may contain food.
+     */
 	@Override
 	public void eat(List<Cell> neighborhood) {
-		
+		// Eat as many fish as are in the neighborhood
+        double eaten = 0.0;
+        for (Cell c : neighborhood) {
+            if (c.getStatus() == 0) {
+                break;
+            }
+
+            //Groper may not eat a shark
+            if (c.getStatus() < status && !(c.getFish() instanceof Shark)) {
+                double w = c.getFish().getWeight();
+                eat(w);
+                c.setFish(null);
+                eaten += w;
+                if (eaten >= maxEat)
+                    break;
+            }
+        }
 		
 		
 	}
 
-	@Override
-	public void move(Cell current, List<Cell> neighborhood) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * Groper breed and spawn to a neighbor cell.
+	 * @param neighborhood List of cells that can be occupied.
+	 */
 	@Override
 	public void breed(List<Cell> neighborhood) {
-		Cell c = Cell.random(cell.neighbours(huntDistance, true));
-        if (c != null) {
-            Fish child = spawn(c);
-            child.setWeight(weight / 2);
-            weight /= 2;
-        }
+		Collections.shuffle(neighborhood);
+		for (Cell c: neighborhood) {
+			if (c.getFish() == null) {
+				Fish child = c.createFish("groper");
+				child.setWeight(weight /2);
+				weight /= 2;
+				break;
+			}
+		}
 		
 	}
 
