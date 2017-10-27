@@ -77,13 +77,13 @@ public class Ocean
         //Cell cells[] = Cells();
     	for(int i = 0; i < height; i++) {
         	for(int j =0 ; j < width; j++) {
-        		cells[i][j].increasePlancton();
+        		Cell current = cells[i][j];
         		if (cells[i][j].getFish() != null) {
         			//System.out.println("a "+ i + " " + j+" ");
         			//cells[i][j].getFish().act(step);
-        			Fish fish = cells[i][j].getFish();
+        			Fish fish = current.getFish();
         			if(fish.isAlive()) {
-        				List<Cell> neighborhood = neighbours(fish.getDistance(), cells[i][j]);
+        				List<Cell> neighborhood = neighbours(fish.getDistance(), current);
         				// Eat some
         				fish.eat(neighborhood);
         				fish.updateWeigth();
@@ -95,11 +95,14 @@ public class Ocean
         					fish.breed(neighborhood);
         				} else {
         					System.out.println("se mexa");
-        					fish.move(cells[i][j], neighborhood);
+        					fish.move(current, neighborhood);
         				}
+        			} else {
+        				//current.setFish(null);
+        				System.out.println("morreu");
         			}
         		}
-        		
+        		current.increasePlancton( neighbours(current));
         	}
         }
     }
@@ -235,6 +238,30 @@ public class Ocean
             return List.copyOf(cels, n);
         else
             return cels;**/
+    	return neighbours;
+    }
+    
+    /**
+     * Return an array of cells in a rectangle surrounding this cell. Cells
+     * are included if there row and column distance from here are both
+     * less than or equal to r
+     * @param r the maximum distance from here of cells returned.
+     * @param empty if true only empty cells are returned
+     * @return array of neighboring cells
+     */
+    public List<Cell> neighbours(Cell cell)
+    {
+    	List<Cell> neighbours = new ArrayList<Cell>();
+    	int row = cell.getRow();
+    	int col = cell.getCol();
+    	if( row != 0)
+    		neighbours.add( cells[row-1][col] );
+    	if( row < height-1)
+    		neighbours.add( cells[row+1][col]);
+    	if( col != 0)
+    		neighbours.add( cells[row][col-1] );
+    	if( col < width-1)
+    		neighbours.add( cells[row][col+1]);
     	return neighbours;
     }
 }

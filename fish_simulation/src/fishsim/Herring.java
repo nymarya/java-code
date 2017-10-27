@@ -1,5 +1,6 @@
 package fishsim;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -76,17 +77,16 @@ public class Herring extends Fish {
 	@Override
 	public void eat(List<Cell> neighborhood) {
 		// Eat some plancton
+		System.out.println("tentou comer");
+		Collections.shuffle(neighborhood);
 		for(Cell c : neighborhood) {
 			
 			double p = c.getPlancton();
 			if (p > planctonEaten) {
 				eat(planctonEaten);
 				p -= planctonEaten;
-			} else {
-				eat(p);
-				p = 0.1; // don't reduce to zero
-			}
-			c.setPlancton(p);
+				c.setPlancton(p);
+			} 
 		}
 		
 
@@ -119,13 +119,10 @@ public class Herring extends Fish {
 	public void move(Cell current, List<Cell> neighborhood) {
 		Collections.shuffle(neighborhood);
 		for (Cell c: neighborhood) {
-			System.out.println("plan: " + c.getPlancton() );
-			System.out.println("planc: " + current.getPlancton() );
-			if (c.getFish() == null && c.getPlancton() >=  current.getPlancton()) {
+			if (c.getFish() == null) {
 				Fish fish = current.getFish();
 				current.setFish(null);
 				c.setFish(fish);
-				System.out.println("moveu para " + c.getCol() + " " + c.getRow() );
 				break;
 			}
 		}

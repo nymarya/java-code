@@ -179,6 +179,23 @@ public class Cell implements Comparable<Cell>
     	plancton = Math.min(plancton * incPlancton, maxPlancton);
     }
     
+    /*
+     * 
+     */
+    public void increasePlancton(List<Cell> neighbors) {
+    	
+    	double increasingTax = 0.5 * plancton * incPlancton;
+    	
+    	double neighborsTax = 0.0;
+    	for( Cell c : neighbors) {
+    		neighborsTax += c.getPlancton() * incPlancton;
+    	}
+    	
+    	increasingTax += 0.5 * neighborsTax/(neighbors.size());
+    	
+    	plancton = Math.min(increasingTax, maxPlancton);
+    }
+    
     /**
      * Return a random cell from the array of cells
      * @param cells
@@ -190,6 +207,7 @@ public class Cell implements Comparable<Cell>
         return cells[(int)(cells.length * Math.random())];
     }
     
+    
     /**
      * Reset cell to initial state.
      */
@@ -199,4 +217,12 @@ public class Cell implements Comparable<Cell>
 		
 		plancton = initialPlancton;
 	}
+    
+    /**
+     * Return level of plancton.
+     * @return
+     */
+    public double getPlanctonLevel() {
+    	return 0.1 * plancton;
+    }
 }

@@ -103,13 +103,15 @@ public class SimulatorView extends JFrame
             
         for(int row = 0; row < ocean.getHeight(); row++) {
             for(int col = 0; col < ocean.getWidth(); col++) {
-                Fish animal = ocean.getFishAt(row, col);
+                Fish animal = ocean.getCell(row, col).getFish();
                 if(animal != null) {
+                	System.out.println("tem bicho");
                     stats.incrementCount(animal.getClass());
                     oceanView.drawMark(col, row, getColor(animal.getClass()));
                 }
                 else {
-                    oceanView.drawMark(col, row, EMPTY_COLOR);
+                	int greenLevel = (int) (ocean.getCell(row, col).getPlanctonLevel() * 255);
+                    oceanView.drawMark(col, row, new Color(0, greenLevel, 0));
                 }
             }
         }

@@ -122,7 +122,7 @@ public abstract class Fish
 	public void move(Cell current, List<Cell> neighborhood) {
 		Collections.shuffle(neighborhood);
 		for (Cell c: neighborhood) {
-			if (c.getFish() != null && c.getPlancton() >  current.getPlancton()) {
+			if (c.getFish() != null ) {
 				Fish fish = current.getFish();
 				current.setFish(null);
 				c.setFish(fish);
