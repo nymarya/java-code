@@ -1,21 +1,19 @@
 package fishsim;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Manage the rectangle of cells representing an ocean
+ * @author Mayra Dantas de Azevedo
  */
 public class Ocean
 {
     // Configurable parameters
-    // Plancton
-    private double initialPlancton = 5.0;
-    private double maxPlancton = 10.0;
-    private double incPlancton = 1.2;
-    
     FishParams herringParams, groperParams, sharkParams;
     private int width, height;
-    private ArrayList<Fish> fishes;
-    private double plancton[];
+    
+    private Cell cells[][];
+    
     
     /**
      * Create a new ocean
@@ -33,12 +31,11 @@ public class Ocean
         this.herringParams = herringParams;
         this.groperParams = groperParams;
         this.sharkParams = sharkParams;
-        fishes = new ArrayList<Fish>(width * height);
-        plancton = new double[width * height];
-        for (int n = 0; n < plancton.length; n++)
-        {
-        	fishes.add(n, null);
-        	plancton[n] = initialPlancton;
+        cells = new Cell[height][width];
+        for(int i = 0; i < height; i++) {
+        	for(int j =0 ; j < width; j++) {
+        		cells[i][j] = new Cell(this, i, j);
+        	}
         }
     }
     
@@ -51,13 +48,15 @@ public class Ocean
      */
     public Fish createFish(Cell cell, String fishType)
     {
-        if (fishType.equals("herring"))
-            return new Herring(cell, herringParams);
-        if (fishType.equals("groper"))
-            return new Groper(cell, groperParams);
-        if (fishType.equals("shark"))
-            return new Shark(cell, sharkParams);
-        return null;
+        //if (fishType.equals("herring"))
+         //   return new Herring(cell, herringParams);
+        //if (fishType.equals("groper"))
+        //    return new Groper(cell, groperParams);
+        //if (fishType.equals("shark"))
+        //    return new Shark(cell, sharkParams);
+        //return null;
+
+    	return cell.createFish(fishType );
     }
     
     /**
@@ -69,32 +68,44 @@ public class Ocean
          * Seed the ocean with new fish occasionally
          */
     	if (step % 100 == 0)
-    		createFish(new Cell(this, 10, 10), "herring");
+    		cells[10][10].createFish("herring");
     	if (step % 100 == 50) {
-    		createFish(new Cell(this, 20, 20), "groper");
-    		createFish(new Cell(this, 40, 40), "shark");
+    		cells[20][20].createFish("groper");
+    		cells[40][40].createFish("shark");
         }
         
         // Act on all the fish
-        Cell cells[] = Cells();
-    	for (int n = 0; n < cells.length; n++)
-    		if (cells[n].getFish() != null)
-    			cells[n].getFish().act(step);
-        // Grow the plancton
-    	for (int n = 0; n < plancton.length; n++)
-    		plancton[n] = Math.min(plancton[n] * incPlancton, maxPlancton);
-    }
-    
-    /**
-     * Get all the cells in the ocean
-     * @return array of cells
-     */
-    public Cell[] Cells()
-    {
-        Cell cells[] = new Cell[width * height];
-        for (int n = 0; n < cells.length; n++)
-            cells[n] = new Cell(this, n / width, n % width);
-        return cells;
+        //Cell cells[] = Cells();
+    	for(int i = 0; i < height; i++) {
+        	for(int j =0 ; j < width; j++) {
+        		Cell current = cells[i][j];
+        		
+        		if (cells[i][j].getFish() != null) {
+        			System.out.println("a "+ i + " " + j+" ");
+        			//cells[i][j].getFish().act(step);
+        			Fish fish = current.getFish();
+        			if(fish.isAlive()) {
+        				List<Cell> neighborhood = neighbours(fish.getDistance(), current);
+        				// Eat some
+        				fish.eat(neighborhood);
+        				fish.updateWeigth();
+        				
+        				// Either spawn into the neighboring cell or if we can't
+        				// breed, move into it.
+        				if(fish.canBreed() ) {
+        					System.out.println("da cria");
+        					fish.breed(neighborhood);
+        				} else {
+        					fish.move(current, neighborhood);
+        				}
+        			} else {
+        				//current.setFish(null);
+        				System.out.println("morreu");
+        			}
+        		}
+        		current.increasePlancton( neighbours(current));
+        	}
+        }
     }
     
     /**
@@ -105,7 +116,8 @@ public class Ocean
      */
     public Fish getFishAt(int row, int col)
     {
-        return fishes.get(width * row + col);
+        //return fishes.get(width * row + col);
+    	return cells[row][col].getFish();
     }
     
     /**
@@ -116,7 +128,8 @@ public class Ocean
      */
     public void setFishAt(Fish fish, int row, int col)
     {
-        fishes.set(width * row + col, fish);
+        //fishes.set(width * row + col, fish);
+    	cells[row][col].setFish(fish);
     }
     
     /**
@@ -127,7 +140,7 @@ public class Ocean
      */
     public double getPlanctonAt(int row, int col)
     {
-    	return plancton[width * row + col];
+    	return cells[row][col].getPlancton();
     }
     
     /**
@@ -138,7 +151,7 @@ public class Ocean
      */
     public void setPlanctonAt(double p, int row, int col)
     {
-    	plancton[width * row + col] = p;
+    	cells[row][col].setPlancton(p);
     }
     
     /**
@@ -155,5 +168,101 @@ public class Ocean
     public int getWidth()
     {
         return width;
+    }
+
+	/**
+	 * @return the herringParams
+	 */
+	public FishParams getHerringParams() {
+		return herringParams;
+	}
+
+	/**
+	 * @return the groperParams
+	 */
+	public FishParams getGroperParams() {
+		return groperParams;
+	}
+
+	/**
+	 * @return the sharkParams
+	 */
+	public FishParams getSharkParams() {
+		return sharkParams;
+	}
+	
+	/**
+	 * Return cell at given location
+	 * @param row Row of cell
+	 * @param col Column of cell
+	 * @return Cell at given locationv
+	 */
+	public Cell getCell(int row, int col) {
+		return cells[row][col];
+	}
+	
+	/**
+	 * Reset ocean to initial state.
+	 */
+	public void reset() {
+		for(int i = 0; i < height; i++) {
+        	for(int j =0 ; j < width; j++) {
+        		cells[i][j].reset();
+        	}
+        }
+	}
+	
+	/**
+     * Return an array of cells in a rectangle surrounding this cell. Cells
+     * are included if there row and column distance from here are both
+     * less than or equal to r
+     * @param r the maximum distance from here of cells returned.
+     * @param empty if true only empty cells are returned
+     * @return array of neighboring cells
+     */
+    public List<Cell> neighbours(int r, Cell cell)
+    {
+    	int left = Math.max(0, cell.getCol() - r);
+    	int right = Math.min(width, cell.getCol() + r + 1);
+    	int top = Math.max(0, cell.getRow() - r);
+    	int bottom = Math.min(height, cell.getRow() + r + 1);
+    	List<Cell> neighbours = new ArrayList<Cell>();
+    	int n = 0;
+    	for (int y = top; y < bottom; y++)
+    		for (int x = left; x < right; x++) {
+    			//if (cells[y][x].getFish() != null)
+    			//	continue;
+    			if (x != cell.getCol() || y != cell.getRow())
+    				neighbours.add( getCell(y, x) );
+    		}
+       /** if (n < cels.size())
+            return List.copyOf(cels, n);
+        else
+            return cels;**/
+    	return neighbours;
+    }
+    
+    /**
+     * Return an array of cells in a rectangle surrounding this cell. Cells
+     * are included if there row and column distance from here are both
+     * less than or equal to r
+     * @param r the maximum distance from here of cells returned.
+     * @param empty if true only empty cells are returned
+     * @return array of neighboring cells
+     */
+    public List<Cell> neighbours(Cell cell)
+    {
+    	List<Cell> neighbours = new ArrayList<Cell>();
+    	int row = cell.getRow();
+    	int col = cell.getCol();
+    	if( row != 0)
+    		neighbours.add( cells[row-1][col] );
+    	if( row < height-1)
+    		neighbours.add( cells[row+1][col]);
+    	if( col != 0)
+    		neighbours.add( cells[row][col-1] );
+    	if( col < width-1)
+    		neighbours.add( cells[row][col+1]);
+    	return neighbours;
     }
 }

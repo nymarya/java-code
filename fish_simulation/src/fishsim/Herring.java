@@ -1,6 +1,9 @@
 package fishsim;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The Herring fish class
@@ -15,8 +18,8 @@ public class Herring extends Fish {
 	 * @param cell fish location
 	 * @param params parameters for the new fish
 	 */
-	public  Herring(Cell cell, FishParams params) {
-		super(cell, params);
+	public  Herring(FishParams params) {
+		super(params);
 		planctonEaten = params.getPlanctonEaten();
 		status = 1;
 	}
@@ -30,81 +33,72 @@ public class Herring extends Fish {
 		return cell.createFish("herring");
 	}
 
-	/**
-	 * Iterate this fish through one simulator cycle
-	 * @param step counter that should be incremented for each
-	 * call. Used to avoid the same fish acting more than once
-	 * in a cycle
-	 */
-	public void act(int step) {
-		if (this.step == step)
-			return;
-		this.step = step;
-		age++;
-
-		// Eat some plancton
-		double p = cell.getPlancton();
-		if (p > planctonEaten) {
-			eat(planctonEaten);
-			p -= planctonEaten;
-		} else {
-			eat(p);
-			p = 0.1; // don't reduce to zero
-		}
-		cell.setPlancton(p);
-
-		// burn some weight and see if we are still viable
-		weight *= weightReduce;
-		if (weight < viableWeight || age > maxAge) {
-			cell.setFish(null);
-			return;
-		}
-
-		// look for the neighboring cell with the most plancton
-		// and no other fish
-		Cell bestNeighbour = null;
-		Cell cells[] = cell.neighbours(1);
-		for (Cell c: cells) {
-			if (c.getFish() != null)
-				continue;
-			if (bestNeighbour == null || c.getPlancton() > bestNeighbour.getPlancton())
-				bestNeighbour = c;
-		}
-		if (bestNeighbour == null)
-			return;
-
-		// Either spawn into the neighboring cell or if we can't
-		// breed, move into it.
-		if (weight >= breedWeight && age > breedAge)
-		{
-			Fish child = spawn(bestNeighbour);
-			child.setWeight(weight * 0.4);
-			weight *= 0.6;
-		} else if (bestNeighbour.getPlancton() > cell.getPlancton())
-			move(bestNeighbour);
-	}
-
 	@Override
 	public void eat(List<Cell> neighborhood) {
-		// TODO Auto-generated method stub
+		// Eat some plancton
+		Collections.shuffle(neighborhood);
+		for(Cell c : neighborhood) {
+			
+			double p = c.getPlancton();
+			if (p > planctonEaten) {
+				eat(planctonEaten);
+				p -= planctonEaten;
+				c.setPlancton(p);
+				break;
+			} 
+		}
+		
 
 	}
-
-	@Override
-	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
+	/**
+	 * Move fish from the current cell to a neighbor cell.
+	 * @param current Cell containing the fish.
+	 * @param neighborhood Neighbor cells. 
+	 */
 	@Override
 	public void move(Cell current, List<Cell> neighborhood) {
-		// TODO Auto-generated method stub
-
+		System.out.println("aaa");
+		Collections.shuffle(neighborhood);
+		System.out.println("planc " + current.getPlancton());
+		System.out.println("ta em " + current.getCol() + " " + current.getRow());
+		for (Cell c: neighborhood) {
+			System.out.println("plan " + c.getPlancton());
+			if (c.getFish() == null ) {
+				Fish fish = current.getFish();
+				current.setFish(null);
+				c.setFish(fish);
+				System.out.println("moveu para " + c.getCol() + " " + c.getRow() );
+				break;
+			}
+		}
 	}
-
+	
+	/**
+	 * Fish breed and spawn to neighbor cell.
+	 * @param neighborhood List of cells that can be occupied.
+	 */
 	@Override
 	public void breed(List<Cell> neighborhood) {
-		// TODO Auto-generated method stub
+		Collections.shuffle(neighborhood);
+		System.out.println(neighborhood.size() + " vizinhos");
+		for (Cell c: neighborhood) {
+			if (c.getFish() == null) {
+				c.createFish("herring");
+				System.out.println("cria em " + c.getCol() + " " + c.getRow());
+				c.getFish().setWeight(weight * 0.4);
+				break;
+			}
+		}
+		weight *= 0.6;
 
 	}
+	
+	/**
+     * Get safe distance 
+     * @return
+     */
+    public int getDistance() {
+    	return 1;
+    }
 }

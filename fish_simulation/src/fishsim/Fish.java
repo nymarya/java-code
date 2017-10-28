@@ -1,6 +1,9 @@
 package fishsim;
 
+import java.util.Collections;
 import java.util.List;
+
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 /**
  * This is the superclass for all kinds of fish
@@ -10,7 +13,6 @@ import java.util.List;
  */
 public abstract class Fish
 {
-	protected Cell cell;
 	protected double weight;
 	protected double viableWeight;
 	protected double weightReduce;
@@ -26,16 +28,14 @@ public abstract class Fish
 	 * @param cell fish location
 	 * @param params parameters for the new fish
 	 */
-	public Fish(Cell cell, FishParams params)
+	public Fish(FishParams params)
 	{
-		this.cell = cell;
 		weight = params.getInitWeight();
 		viableWeight = params.getViableWeight();
 		weightReduce = params.getWeightReduce();
 		breedWeight = params.getBreedWeight();
 		breedAge = params.getBreedAge();
 		maxAge = params.getMaxAge();
-		cell.setFish(this);
 		age = 0;
 	}
 
@@ -87,16 +87,8 @@ public abstract class Fish
 	 */
 	public void move(Cell cell)
 	{
-		this.cell.setFish(null);
-		this.cell = cell;
 		cell.setFish(this);
 	}
-
-	/**
-	 * Called for each fish once per simulator step
-	 * @param step incrementing step number
-	 */
-	public abstract void act(int step);
 
 	/**
 	 * Fish eats algae in neighborhood.
@@ -108,19 +100,60 @@ public abstract class Fish
 	 * Check whether fish is alive.
 	 * @return True if fish is alive, false otherwise.
 	 */
-	public abstract boolean isAlive();
+	public boolean isAlive() {
+		System.out.println("teje vivo");
+		age++;
+		return age < maxAge && weight >= viableWeight;
+	}
 	
 	/**
 	 * Move fish from the current cell to a neighbor cell.
 	 * @param current Cell containing the fish.
 	 * @param neighborhood Neighbor cells. 
 	 */
-	public abstract void move(Cell current, List<Cell> neighborhood);
+	public void move(Cell current, List<Cell> neighborhood) {
+		System.out.println("aaa");
+		Collections.shuffle(neighborhood);
+		System.out.println("planc " + current.getPlancton());
+		for (Cell c: neighborhood) {
+			System.out.println("plan " + c.getPlancton());
+			if (c.getFish() == null ) {
+				Fish fish = current.getFish();
+				current.setFish(null);
+				c.setFish(fish);
+				System.out.println("moveu para " + c.getCol() + " " + c.getRow() );
+				break;
+			}
+		}
+	}
 	
 	/**
 	 * Populate a neighbor cell with a new fish.
 	 * @param neighborhood
 	 */
 	public abstract void breed(List<Cell> neighborhood);
+	
+	/**
+	 * Check if fish can breed
+	 * @return True if fish can breed, false otherwise.
+	 */
+	public boolean canBreed() {
+		return weight > breedWeight && age >= breedAge;
+	}
+	
+	/**
+	 * Update wigth of the fish
+	 */
+	public void updateWeigth() {
+		weight *= weightReduce;
+	}
+	
+	/**
+     * Get safe distance 
+     * @return
+     */
+    public int getDistance() {
+    	return 1;
+    }
 	
 }
