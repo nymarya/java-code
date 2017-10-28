@@ -58,11 +58,9 @@ public class Herring extends Fish {
 	@Override
 	public void breed(List<Cell> neighborhood) {
 		Collections.shuffle(neighborhood);
-		System.out.println(neighborhood.size() + " vizinhos");
 		for (Cell c: neighborhood) {
 			if (c.getFish() == null) {
 				c.createFish("herring");
-				System.out.println("cria em " + c.getCol() + " " + c.getRow());
 				c.getFish().setWeight(weight * 0.4);
 				break;
 			}

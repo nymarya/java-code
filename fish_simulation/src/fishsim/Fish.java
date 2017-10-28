@@ -112,14 +112,11 @@ public abstract class Fish
 	 */
 	public void move(Cell current, List<Cell> neighborhood) {
 		Collections.shuffle(neighborhood);
-		System.out.println("planc " + current.getPlancton());
 		for (Cell c: neighborhood) {
-			System.out.println("plan " + c.getPlancton());
 			if (c.getFish() == null ) {
 				Fish fish = current.getFish();
 				current.setFish(null);
 				c.setFish(fish);
-				System.out.println("moveu para " + c.getCol() + " " + c.getRow() );
 				break;
 			}
 		}
@@ -140,7 +137,7 @@ public abstract class Fish
 	}
 	
 	/**
-	 * Update wigth of the fish
+	 * Update weight of the fish
 	 */
 	public void updateWeigth() {
 		weight *= weightReduce;
