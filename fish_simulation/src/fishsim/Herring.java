@@ -18,8 +18,8 @@ public class Herring extends Fish {
 	 * @param cell fish location
 	 * @param params parameters for the new fish
 	 */
-	public  Herring(Cell cell, FishParams params) {
-		super(cell, params);
+	public  Herring(FishParams params) {
+		super(params);
 		planctonEaten = params.getPlanctonEaten();
 		status = 1;
 	}
@@ -31,47 +31,6 @@ public class Herring extends Fish {
 	 */
 	public Fish spawn(Cell cell) {
 		return cell.createFish("herring");
-	}
-
-	/**
-	 * Iterate this fish through one simulator cycle
-	 * @param step counter that should be incremented for each
-	 * call. Used to avoid the same fish acting more than once
-	 * in a cycle
-	 */
-	public void act(int step) {
-		if (this.step == step)
-			return;
-		this.step = step;
-		age++;
-
-		// Eat some plancton
-
-		// burn some weight and see if we are still viable
-		weight *= weightReduce;
-
-		// look for the neighboring cell with the most plancton
-		// and no other fish
-		Cell bestNeighbour = null;
-		Cell cells[] = cell.neighbours(1);
-		for (Cell c: cells) {
-			if (c.getFish() != null)
-				continue;
-			if (bestNeighbour == null || c.getPlancton() > bestNeighbour.getPlancton())
-				bestNeighbour = c;
-		}
-		if (bestNeighbour == null)
-			return;
-
-		// Either spawn into the neighboring cell or if we can't
-		// breed, move into it.
-		if (weight >= breedWeight && age > breedAge)
-		{
-			Fish child = spawn(bestNeighbour);
-			child.setWeight(weight * 0.4);
-			weight *= 0.6;
-		} else if (bestNeighbour.getPlancton() > cell.getPlancton())
-			move(bestNeighbour);
 	}
 
 	@Override
@@ -128,7 +87,7 @@ public class Herring extends Fish {
 				c.createFish("herring");
 				System.out.println("cria em " + c.getCol() + " " + c.getRow());
 				c.getFish().setWeight(weight * 0.4);
-				//break;
+				break;
 			}
 		}
 		weight *= 0.6;

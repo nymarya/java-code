@@ -13,7 +13,6 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
  */
 public abstract class Fish
 {
-	protected Cell cell;
 	protected double weight;
 	protected double viableWeight;
 	protected double weightReduce;
@@ -29,16 +28,14 @@ public abstract class Fish
 	 * @param cell fish location
 	 * @param params parameters for the new fish
 	 */
-	public Fish(Cell cell, FishParams params)
+	public Fish(FishParams params)
 	{
-		this.cell = cell;
 		weight = params.getInitWeight();
 		viableWeight = params.getViableWeight();
 		weightReduce = params.getWeightReduce();
 		breedWeight = params.getBreedWeight();
 		breedAge = params.getBreedAge();
 		maxAge = params.getMaxAge();
-		cell.setFish(this);
 		age = 0;
 	}
 
@@ -90,16 +87,8 @@ public abstract class Fish
 	 */
 	public void move(Cell cell)
 	{
-		this.cell.setFish(null);
-		this.cell = cell;
 		cell.setFish(this);
 	}
-
-	/**
-	 * Called for each fish once per simulator step
-	 * @param step incrementing step number
-	 */
-	public abstract void act(int step);
 
 	/**
 	 * Fish eats algae in neighborhood.

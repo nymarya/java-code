@@ -18,7 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * (Fill in description and author info here)
+ * 
+ * @author Mayra Dantas de Azevedo
  */
 
 public class Simulator extends JFrame

@@ -3,11 +3,15 @@ package fishsim;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Red shark fish class
+ * @author Mayra Dantas de Azevedo
+ */
 public class Shark extends Predator {
         
-        public Shark(Cell cell, FishParams params)
+        public Shark(FishParams params)
         {
-            super(cell, params);
+            super(params);
             status = 3;
         }
         

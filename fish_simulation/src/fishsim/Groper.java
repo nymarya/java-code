@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Blue groper fish class
- * @author jdb
+ * @author Mayra Dantas de Azevedo
  */
 public class Groper extends Predator {
 
@@ -15,9 +15,9 @@ public class Groper extends Predator {
      * @param cell location of the fish
      * @param params initial parameters
      */
-    public Groper(Cell cell, FishParams params)
+    public Groper(FishParams params)
     {
-        super(cell, params);
+        super( params);
         status = 2;
     }
 

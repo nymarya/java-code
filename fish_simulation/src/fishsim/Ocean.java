@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Manage the rectangle of cells representing an ocean
+ * @author Mayra Dantas de Azevedo
  */
 public class Ocean
 {

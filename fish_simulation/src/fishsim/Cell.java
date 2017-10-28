@@ -54,11 +54,11 @@ public class Cell implements Comparable<Cell>
     	//return ocean.createFish(this, fishType);
 
     	if (fishType.equals("herring"))
-            this.fish = new Herring(this, ocean.getHerringParams());
+            this.fish = new Herring(ocean.getHerringParams());
         if (fishType.equals("groper"))
-            this.fish =  new Groper(this, ocean.getGroperParams());
+            this.fish =  new Groper(ocean.getGroperParams());
         if (fishType.equals("shark"))
-            this.fish = new Shark(this, ocean.getSharkParams());
+            this.fish = new Shark( ocean.getSharkParams());
         return fish;
         
     }
