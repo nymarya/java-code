@@ -64,6 +64,7 @@ public class Groper extends Predator {
 	 */
 	@Override
 	public void breed(List<Cell> neighborhood) {
+		System.out.println(neighborhood.size() + " vizinhos");
 		Collections.shuffle(neighborhood);
 		for (Cell c: neighborhood) {
 			if (c.getFish() == null) {

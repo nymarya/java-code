@@ -78,8 +78,9 @@ public class Ocean
     	for(int i = 0; i < height; i++) {
         	for(int j =0 ; j < width; j++) {
         		Cell current = cells[i][j];
+        		
         		if (cells[i][j].getFish() != null) {
-        			//System.out.println("a "+ i + " " + j+" ");
+        			System.out.println("a "+ i + " " + j+" ");
         			//cells[i][j].getFish().act(step);
         			Fish fish = current.getFish();
         			if(fish.isAlive()) {
@@ -91,10 +92,9 @@ public class Ocean
         				// Either spawn into the neighboring cell or if we can't
         				// breed, move into it.
         				if(fish.canBreed() ) {
-        					
+        					System.out.println("da cria");
         					fish.breed(neighborhood);
         				} else {
-        					System.out.println("se mexa");
         					fish.move(current, neighborhood);
         				}
         			} else {

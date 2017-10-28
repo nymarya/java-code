@@ -77,7 +77,6 @@ public class Herring extends Fish {
 	@Override
 	public void eat(List<Cell> neighborhood) {
 		// Eat some plancton
-		System.out.println("tentou comer");
 		Collections.shuffle(neighborhood);
 		for(Cell c : neighborhood) {
 			
@@ -86,10 +85,34 @@ public class Herring extends Fish {
 				eat(planctonEaten);
 				p -= planctonEaten;
 				c.setPlancton(p);
+				break;
 			} 
 		}
 		
 
+	}
+	
+	/**
+	 * Move fish from the current cell to a neighbor cell.
+	 * @param current Cell containing the fish.
+	 * @param neighborhood Neighbor cells. 
+	 */
+	@Override
+	public void move(Cell current, List<Cell> neighborhood) {
+		System.out.println("aaa");
+		Collections.shuffle(neighborhood);
+		System.out.println("planc " + current.getPlancton());
+		System.out.println("ta em " + current.getCol() + " " + current.getRow());
+		for (Cell c: neighborhood) {
+			System.out.println("plan " + c.getPlancton());
+			if (c.getFish() == null ) {
+				Fish fish = current.getFish();
+				current.setFish(null);
+				c.setFish(fish);
+				System.out.println("moveu para " + c.getCol() + " " + c.getRow() );
+				break;
+			}
+		}
 	}
 	
 	/**
@@ -99,33 +122,17 @@ public class Herring extends Fish {
 	@Override
 	public void breed(List<Cell> neighborhood) {
 		Collections.shuffle(neighborhood);
+		System.out.println(neighborhood.size() + " vizinhos");
 		for (Cell c: neighborhood) {
 			if (c.getFish() == null) {
-				Fish child = c.createFish("herring");
+				c.createFish("herring");
 				System.out.println("cria em " + c.getCol() + " " + c.getRow());
-				child.setWeight(weight * 0.4);
-				break;
+				c.getFish().setWeight(weight * 0.4);
+				//break;
 			}
 		}
 		weight *= 0.6;
 
-	}
-	
-	/**
-	 * Move fish from the current cell to a neighbor cell.
-	 * @param current Cell containing the fish.
-	 * @param neighborhood Neighbor cells. 
-	 */
-	public void move(Cell current, List<Cell> neighborhood) {
-		Collections.shuffle(neighborhood);
-		for (Cell c: neighborhood) {
-			if (c.getFish() == null) {
-				Fish fish = current.getFish();
-				current.setFish(null);
-				c.setFish(fish);
-				break;
-			}
-		}
 	}
 	
 	/**
