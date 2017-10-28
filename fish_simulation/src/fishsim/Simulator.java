@@ -198,6 +198,14 @@ public class Simulator extends JFrame
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
+		
+		btnStop.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ocean.reset();
+				paused = true;
+			}
+		});
 		pnlButtons.add(btnStop, c);
 
 		panel.add(pnlButtons);

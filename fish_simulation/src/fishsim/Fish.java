@@ -101,7 +101,6 @@ public abstract class Fish
 	 * @return True if fish is alive, false otherwise.
 	 */
 	public boolean isAlive() {
-		System.out.println("teje vivo");
 		age++;
 		return age < maxAge && weight >= viableWeight;
 	}
@@ -112,7 +111,6 @@ public abstract class Fish
 	 * @param neighborhood Neighbor cells. 
 	 */
 	public void move(Cell current, List<Cell> neighborhood) {
-		System.out.println("aaa");
 		Collections.shuffle(neighborhood);
 		System.out.println("planc " + current.getPlancton());
 		for (Cell c: neighborhood) {

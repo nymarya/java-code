@@ -40,26 +40,6 @@ public class Ocean
     }
     
     /**
-     * Fish creation factory
-     * Create a new fish of the named type
-     * @param cell
-     * @param fishType string with the name of the kind of fish
-     * @return created fish
-     */
-    public Fish createFish(Cell cell, String fishType)
-    {
-        //if (fishType.equals("herring"))
-         //   return new Herring(cell, herringParams);
-        //if (fishType.equals("groper"))
-        //    return new Groper(cell, groperParams);
-        //if (fishType.equals("shark"))
-        //    return new Shark(cell, sharkParams);
-        //return null;
-
-    	return cell.createFish(fishType );
-    }
-    
-    /**
      * Put the ocean through one iteration of the simulator
      * @param step number of this iteration
      */
@@ -81,8 +61,6 @@ public class Ocean
         		Cell current = cells[i][j];
         		
         		if (cells[i][j].getFish() != null) {
-        			System.out.println("a "+ i + " " + j+" ");
-        			//cells[i][j].getFish().act(step);
         			Fish fish = current.getFish();
         			if(fish.isAlive()) {
         				List<Cell> neighborhood = neighbours(fish.getDistance(), current);
@@ -93,14 +71,12 @@ public class Ocean
         				// Either spawn into the neighboring cell or if we can't
         				// breed, move into it.
         				if(fish.canBreed() ) {
-        					System.out.println("da cria");
         					fish.breed(neighborhood);
         				} else {
         					fish.move(current, neighborhood);
         				}
         			} else {
-        				//current.setFish(null);
-        				System.out.println("morreu");
+        				current.setFish(null);
         			}
         		}
         		current.increasePlancton( neighbours(current));
@@ -195,7 +171,7 @@ public class Ocean
 	 * Return cell at given location
 	 * @param row Row of cell
 	 * @param col Column of cell
-	 * @return Cell at given locationv
+	 * @return Cell at given location
 	 */
 	public Cell getCell(int row, int col) {
 		return cells[row][col];
@@ -207,7 +183,7 @@ public class Ocean
 	public void reset() {
 		for(int i = 0; i < height; i++) {
         	for(int j =0 ; j < width; j++) {
-        		cells[i][j].reset();
+        		cells[i][j]= new Cell(this, i, j);
         	}
         }
 	}
@@ -230,15 +206,11 @@ public class Ocean
     	int n = 0;
     	for (int y = top; y < bottom; y++)
     		for (int x = left; x < right; x++) {
-    			//if (cells[y][x].getFish() != null)
-    			//	continue;
+
     			if (x != cell.getCol() || y != cell.getRow())
     				neighbours.add( getCell(y, x) );
     		}
-       /** if (n < cels.size())
-            return List.copyOf(cels, n);
-        else
-            return cels;**/
+
     	return neighbours;
     }
     

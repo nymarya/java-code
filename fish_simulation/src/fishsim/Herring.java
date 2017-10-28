@@ -52,29 +52,6 @@ public class Herring extends Fish {
 	}
 	
 	/**
-	 * Move fish from the current cell to a neighbor cell.
-	 * @param current Cell containing the fish.
-	 * @param neighborhood Neighbor cells. 
-	 */
-	@Override
-	public void move(Cell current, List<Cell> neighborhood) {
-		System.out.println("aaa");
-		Collections.shuffle(neighborhood);
-		System.out.println("planc " + current.getPlancton());
-		System.out.println("ta em " + current.getCol() + " " + current.getRow());
-		for (Cell c: neighborhood) {
-			System.out.println("plan " + c.getPlancton());
-			if (c.getFish() == null ) {
-				Fish fish = current.getFish();
-				current.setFish(null);
-				c.setFish(fish);
-				System.out.println("moveu para " + c.getCol() + " " + c.getRow() );
-				break;
-			}
-		}
-	}
-	
-	/**
 	 * Fish breed and spawn to neighbor cell.
 	 * @param neighborhood List of cells that can be occupied.
 	 */

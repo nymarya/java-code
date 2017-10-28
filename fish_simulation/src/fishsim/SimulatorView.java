@@ -13,8 +13,7 @@ import java.util.HashMap;
  * Colors for each type of species can be defined using the
  * setColor method.
  * 
- * @author David J. Barnes and Michael Kolling
- * @version 2003.12.22
+ * @author Mayra Dantas de Azevedo
  */
 public class SimulatorView extends JFrame
 {
@@ -105,7 +104,6 @@ public class SimulatorView extends JFrame
             for(int col = 0; col < ocean.getWidth(); col++) {
                 Fish animal = ocean.getCell(row, col).getFish();
                 if(animal != null) {
-                	System.out.println("tem bicho");
                     stats.incrementCount(animal.getClass());
                     oceanView.drawMark(col, row, getColor(animal.getClass()));
                 }
