@@ -139,21 +139,21 @@ public class BST {
 	 * Traverse the bst
 	 */
 	public void levelTraversal() {
-		ArrayList<Node> nodes = new ArrayList<Node>();
+		Deque<Node> nodes = new ArrayDeque<Node>();
 		
 		int i = 0;
-		nodes.add(i++, root);
+		nodes.addFirst(root);
 		
 		while( !nodes.isEmpty() ) {
-			Node nd = nodes.remove( nodes.size()-1 );
+			Node nd = nodes.removeLast();
 			i--;
 			System.out.println(nd.getKey());
 			
 			if(nd.getLeft() != null)
-				nodes.add(i++, nd.getLeft());
+				nodes.addFirst(nd.getLeft());
 			
 			if(nd.getRight() != null)
-				nodes.add(i++, nd.getRight());
+				nodes.addFirst(nd.getRight());
 			
 		}
 	}
