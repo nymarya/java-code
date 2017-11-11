@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Represent a binary search tree.
@@ -141,12 +142,11 @@ public class BST {
 	public void levelTraversal() {
 		Deque<Node> nodes = new ArrayDeque<Node>();
 		
-		int i = 0;
 		nodes.addFirst(root);
 		
 		while( !nodes.isEmpty() ) {
 			Node nd = nodes.removeLast();
-			i--;
+
 			System.out.println(nd.getKey());
 			
 			if(nd.getLeft() != null)
@@ -156,6 +156,58 @@ public class BST {
 				nodes.addFirst(nd.getRight());
 			
 		}
+	}
+	
+	public void visit( Node node) {
+		
+	}
+	
+	/**
+	 * Traverse in preorder
+	 */
+	public void preOrderTraversal() {
+		Stack<Node> nodes = new Stack<Node>();
+		
+		nodes.push(root);
+		
+		while( !nodes.empty() ) {
+			Node node = nodes.pop();
+			
+			visit(node);
+			
+			if(node.getRight() != null) {
+				nodes.push(node.getRight());
+			}
+			
+			if(node.getLeft() != null ) {
+				nodes.push(node.getLeft());
+			}
+		}
+	}
+	
+	public void calculateHeight( Node node) {
+		
+		if(node.getLeft() != null)
+			calculateHeight(node.getLeft());
+		
+		if(node.getRight() != null)
+			calculateHeight(node.getRight());
+		
+		getHeight(node);
+	}
+	
+	private void getHeight(Node node) {
+		int altL = 1;
+		int altR = 1;
+		
+		if(node.getLeft() != null)
+			altL += node.getLeft().getHeight();
+		
+		if(node.getRight() != null)
+			altR += node.getRight().getHeight();
+		
+		int height = (altL > altR) ? altL : altR;
+		node.setHeight(height);
 	}
 	
 }
