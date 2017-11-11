@@ -1,7 +1,10 @@
 package trees;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -51,21 +54,26 @@ public class BST {
 	 */
 	public void insert(int key, int content) {
 		
-		Node node_ = new Node(key, content, null, null, 0);
-		
 		//check where to insert the new node
-		int f = 0;
+		int [] f = {0};
 		Node pt = search(key, f);
 		
-		if( f == 1) {
+		if( f[0] == 1) {
 			//node already exists, insert failed
 			return;
 		}
 		
-		if(f == 2 ) {
+		Node node_ = new Node(key, content, null, null, 0);
+		
+		if( root == null) {
+			root = node_;
+			return;
+		}
+
+		if(f[0] == 2 ) {
 			//pt has an empty left child
 			pt.setLeft(node_);
-		} else {
+		} else if (f[0]==3){
 			//pt has an empty right child
 			pt.setRight(node_);
 		}
@@ -83,29 +91,29 @@ public class BST {
 	 * 			If f=3, the key wasn't found and 'pt' points to the node without 	         
 	 * 					the right child. 	
 	 */
-	public Node search(int key, int f) {
+	public Node search(int key, int[] f) {
 		Node rt = root;
-		
+	
 		//if tree is not empty
 		if( rt != null) {
-			
-			while(f != 0) {
+			while(f[0] == 0) {
 				//if key was found
 				if( rt.getKey() == key ) {
-					f = 1;
+					f[0] = 1;
 				} else if( rt.getKey() > key ) {	
 					//key wasn't found, look at left subtree
 
 					if( rt.getLeft() != null) 
 						rt = rt.getLeft();
 					else 
-						f = 2;
+						f[0] = 2;
 				} else {
 					//look at right subtree
+
 					if(rt.getRight() != null)
 						rt = rt.getRight();
 					else
-						f = 3;
+						f[0] = 3;
 				}
 			}
 		}
@@ -127,6 +135,27 @@ public class BST {
 		this.root = root;
 	}
 	
-	
+	/**
+	 * Traverse the bst
+	 */
+	public void levelTraversal() {
+		ArrayList<Node> nodes = new ArrayList<Node>();
+		
+		int i = 0;
+		nodes.add(i++, root);
+		
+		while( !nodes.isEmpty() ) {
+			Node nd = nodes.remove( nodes.size()-1 );
+			i--;
+			System.out.println(nd.getKey());
+			
+			if(nd.getLeft() != null)
+				nodes.add(i++, nd.getLeft());
+			
+			if(nd.getRight() != null)
+				nodes.add(i++, nd.getRight());
+			
+		}
+	}
 	
 }
