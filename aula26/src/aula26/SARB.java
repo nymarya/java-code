@@ -9,10 +9,44 @@ import java.util.List;
  */
 public class SARB {
 
-	List<Buraco> buracos;
-	List<ArquivoDanos> arquivosDeDanos;
+	private List<Buraco> buracos;
 	
+	/**
+	 * Registra buraco no banco
+	 * @param buraco
+	 */
 	public void registraBuraco( Buraco buraco) {
 		//adiciona buraco 
+	}
+	
+	/**
+	 * Registra dano associando o mesmo a algum buraco.
+	 * @param buraco Buraco que provocou dano
+	 * @param c Cidadão que relatou dano
+	 * @param prejuizo Quantia em reais de prejuizo 
+	 * @param tipoDano Tipo de dano causado
+	 */
+	public void registraDano( Buraco buraco, Cidadao c, int prejuizo, String tipoDano) {
+		//cria arquivo de dano
+		//associa a buraco
+		
+	}
+	
+	/**
+	 * Busca buracos no endereço dado
+	 * @param endereco
+	 */
+	public List<Buraco> buscaBuraco( String endereco) {
+		//realiza busca
+		
+		//STUB
+		return null;
+	}
+	
+	/**
+	 * Lista buracos registrados no sistema
+	 */
+	public void listarBuracos() {
+		//lista e exibe informações
 	}
 }

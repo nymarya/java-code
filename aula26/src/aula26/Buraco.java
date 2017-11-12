@@ -1,5 +1,7 @@
 package aula26;
 
+import java.util.List;
+
 /**
  * Representa o buraco que precisa ser reparado.
  * 
@@ -14,6 +16,10 @@ public class Buraco {
 	private int tamanho;
 	//localização da rua (no meio da rua, na calçada, etc)
 	private String localizacao;
+	
+	//Danos causados pelo buraco
+	private List<ArquivoDano> danos;
+	
 	/**
 	 * @param id
 	 * @param endereco
@@ -21,7 +27,6 @@ public class Buraco {
 	 * @param localizacao
 	 */
 	public Buraco(int id, String endereco, int tamanho, String localizacao) {
-		super();
 		this.id = id;
 		this.endereco = endereco;
 		this.tamanho = tamanho;
@@ -89,6 +94,13 @@ public class Buraco {
 		//STUB
 		String prioridade = "alta";
 		return prioridade;
+	}
+	
+	/**
+	 * Associa dano relatado ao buraco.
+	 */
+	public void associaDano(ArquivoDano dano) {
+		//adiciona dano à lista
 	}
 	
 }
