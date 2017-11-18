@@ -142,18 +142,18 @@ public class BST {
 	public void levelTraversal() {
 		Deque<Node> nodes = new ArrayDeque<Node>();
 		
-		nodes.addFirst(root);
+		nodes.addLast(root);
 		
 		while( !nodes.isEmpty() ) {
-			Node nd = nodes.removeLast();
+			Node nd = nodes.removeFirst();
 
 			System.out.println(nd.getKey());
 			
 			if(nd.getLeft() != null)
-				nodes.addFirst(nd.getLeft());
+				nodes.addLast(nd.getLeft());
 			
 			if(nd.getRight() != null)
-				nodes.addFirst(nd.getRight());
+				nodes.addLast(nd.getRight());
 			
 		}
 	}
