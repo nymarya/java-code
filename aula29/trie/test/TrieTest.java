@@ -12,8 +12,12 @@ public class TrieTest {
 	public void test() {
 		Trie trie = new Trie();
 		boolean result = trie.search("salut");
-		
 		assertEquals(false, result);
+		
+		trie.insertWord("salut");
+		result = trie.search("salut");
+		
+		assertEquals(true, result);
 	}
 
 }

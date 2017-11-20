@@ -72,8 +72,7 @@ public class Trie {
 			int index = s.charAt(length) - 94;
 			pt.setNode(index, node);
 			
-			//Skip to the next node
-			pt = pt.getNodeAt(index);
+			pt.setTerminalInfo(true);
 			
 		}
 		
