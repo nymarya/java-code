@@ -1,7 +1,5 @@
 package trees;
 
-import java.util.ArrayList;
-
 /**
  * Represents a TrieNode from a Trie-R-Way. 
  * @author Mayra D. de Azevedo
@@ -9,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TrieNode {
 
-	//alphabet + '$' symbol
+	//alphabet symbol
 	private TrieNode[] digits;
 	//information whether node is terminal or not
 	private boolean info;
@@ -18,7 +16,12 @@ public class TrieNode {
 	 * Constructs node
 	 */
 	public TrieNode() {
-		this.digits = new TrieNode[27];
+		this.digits = new TrieNode[26];
+		
+		for( TrieNode t : digits)
+			t = null;
+		
+		this.info = false;
 	}
 	
 	/**
@@ -27,6 +30,32 @@ public class TrieNode {
 	 */
 	public boolean isTerminal() {
 		return info;
+	}
+	
+	/**
+	 * Get node at the given position.
+	 * @param index Index of the node
+	 * @return Node at the index given.
+	 */
+	public TrieNode getNodeAt(int index) {
+		return digits[index];
+	}
+	
+	/**
+	 * Set node at the given position.
+	 * @param index Index of the node
+	 * @param node New node.
+	 */
+	public void setNode(int index, TrieNode node) {
+		this.digits[index] = node;
+	}
+	
+	/**
+	 * Update node info.
+	 * @param info
+	 */
+	public void setTerminalInfo(boolean info) {
+		this.info = info;
 	}
 	
 }
