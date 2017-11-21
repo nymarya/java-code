@@ -18,6 +18,18 @@ public class TrieTest {
 		result = trie.search("salut");
 		
 		assertEquals(true, result);
+		
+		trie.insertWord("formidable");
+		trie.insertWord("super");
+		
+		
+		result = trie.search("formidable");
+		assertEquals(true, result);
+		result = trie.search("super");
+		assertEquals(true, result);
+		result = trie.search("form");
+		assertEquals(false, result);
+		
 	}
 
 }

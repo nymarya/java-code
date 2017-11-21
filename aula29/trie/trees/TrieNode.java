@@ -12,6 +12,8 @@ public class TrieNode {
 	//information whether node is terminal or not
 	private boolean info;
 	
+	public int valor;
+	
 	/**
 	 * Constructs node
 	 */
@@ -22,6 +24,7 @@ public class TrieNode {
 			t = null;
 		
 		this.info = false;
+		this.valor = 0;
 	}
 	
 	/**

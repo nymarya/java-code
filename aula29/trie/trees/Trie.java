@@ -16,11 +16,11 @@ public class Trie {
 		this.root = new TrieNode();
 	}
 
-	private int searchWord(String s, TrieNode pt) {
+	private Pair<Integer, TrieNode> searchWord(String s, TrieNode pt) {
 		// l = tamanho do maior prefixo de s que corresponde ao prefixo de alguma chave
 		int l = 0;
-
 		while( l < s.length() ) {
+			System.out.println(s.charAt(l));
 
 			//get character position at the alphabet
 			int index = s.charAt(l) - 94;
@@ -32,9 +32,13 @@ public class Trie {
 				//Stop the loop when there is no matching digit anymore
 				break;
 			}
+			
 		}
 		
-		return l;
+		
+		Pair<Integer, TrieNode> pair = new Pair<Integer,TrieNode>(l, pt);
+		
+		return pair;
 	}
 
 	/**
@@ -44,7 +48,10 @@ public class Trie {
 	public void insertWord( String s) {
 		//Use auxiliar method
 		TrieNode pt = root;
-		int length = searchWord(s, pt);
+		Pair<Integer, TrieNode> result = searchWord(s, pt);
+		int length = result.getFirst();
+		pt = result.getSecond();
+		System.out.println("insert");
 		
 		
 		//If key already exists in the tree, there's nothing else to do
@@ -53,7 +60,7 @@ public class Trie {
 			//ate o length as chaves tem o mesmo prefixo
 			//inserte chave a partir de length
 			
-			while(length < s.length()-1) {
+			while(length < s.length()) {
 				//allocate new Node
 				TrieNode node = new TrieNode();
 				
@@ -63,15 +70,10 @@ public class Trie {
 				
 				//Skip to the next node
 				pt = pt.getNodeAt(index);
+				length++;
 			}
 			
 			//Set last node as terminal
-			TrieNode node = new TrieNode();
-			
-			//get character position at the alphabet
-			int index = s.charAt(length) - 94;
-			pt.setNode(index, node);
-			
 			pt.setTerminalInfo(true);
 			
 		}
@@ -85,12 +87,14 @@ public class Trie {
 	 */
 	public boolean search(String s) {
 
-		//Use auxiliar method
-		TrieNode pt = root;
-		searchWord(s, pt);
+		//Use auxiliary method
+		TrieNode pointer = root;
+		Pair<Integer, TrieNode> result = searchWord(s, pointer);
+		
+		pointer = result.getSecond();
 
 		//Check if the remaining pointer is end of word
-		if(pt.isTerminal())
+		if(pointer.isTerminal())
 			return true;
 
 		return false;
