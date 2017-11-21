@@ -16,11 +16,18 @@ public class Trie {
 		this.root = new TrieNode();
 	}
 
+	/**
+	 * Search key at the tree.
+	 * @param s The key to be searched
+	 * @param pt The current pointer.
+	 * @return Length of the prefix and a pointer to the node
+	 * that corresponds to the longest prefix that matches with the key.
+	 * 
+	 */
 	private Pair<Integer, TrieNode> searchWord(String s, TrieNode pt) {
-		// l = tamanho do maior prefixo de s que corresponde ao prefixo de alguma chave
+		// l = length of the longest prefix in common with some key
 		int l = 0;
 		while( l < s.length() ) {
-			System.out.println(s.charAt(l));
 
 			//get character position at the alphabet
 			int index = s.charAt(l) - 94;
@@ -34,7 +41,6 @@ public class Trie {
 			}
 			
 		}
-		
 		
 		Pair<Integer, TrieNode> pair = new Pair<Integer,TrieNode>(l, pt);
 		
@@ -51,7 +57,6 @@ public class Trie {
 		Pair<Integer, TrieNode> result = searchWord(s, pt);
 		int length = result.getFirst();
 		pt = result.getSecond();
-		System.out.println("insert");
 		
 		
 		//If key already exists in the tree, there's nothing else to do
