@@ -30,6 +30,17 @@ public class TrieTest {
 		result = trie.search("form");
 		assertEquals(false, result);
 		
+		trie.insertWord("superhero");
+		result = trie.search("superhero");
+		assertEquals(true, result);
+		
+		trie.remove("super");
+		result = trie.search("formidable");
+		assertEquals(true, result);
+		result = trie.search("super");
+		assertEquals(false, result);
+		
+		
 	}
 
 }

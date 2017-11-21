@@ -104,5 +104,47 @@ public class Trie {
 
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param s
+	 */
+	public void remove(String s) {
+		//Use helper method
+		root = removeHelper(s, root, 0);
+	}
+	
+	/**
+	 * 
+	 * @param s
+	 * @param pt
+	 * @param l
+	 * @return
+	 */
+	private TrieNode removeHelper(String s, TrieNode pt, int l) {
+		//Base case 1 = null pt
+		if(pt == null)
+			return null;
+		
+		//Base case 2: key is prefix to another key
+		if(l == s.length() && pt.isTerminal() )
+			pt.setTerminalInfo(false);
+		
+		if(l < s.length() ) {
+			//Recursive calls
+			int index = s.charAt(l) - 94;
+			TrieNode aux = pt.getNodeAt(index);
+			pt.setNode(index, removeHelper(s, aux, l+1));
+		}
+		//if pt is terminal
+		if(pt.isTerminal())
+			return pt;
+		
+		//check if pt is leaf
+		for(int i = 0; i < 26; i++)
+			if(pt.getNodeAt(i) != null) return pt;
+		
+		return null;
+	}
 
 }
