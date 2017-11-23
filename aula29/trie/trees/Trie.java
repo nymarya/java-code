@@ -39,11 +39,11 @@ public class Trie {
 				//Stop the loop when there is no matching digit anymore
 				break;
 			}
-			
+
 		}
-		
+
 		Pair<Integer, TrieNode> pair = new Pair<Integer,TrieNode>(l, pt);
-		
+
 		return pair;
 	}
 
@@ -57,32 +57,25 @@ public class Trie {
 		Pair<Integer, TrieNode> result = searchWord(s, pt);
 		int length = result.getFirst();
 		pt = result.getSecond();
-		
-		
-		//If key already exists in the tree, there's nothing else to do
-		//else
-		if(!pt.isTerminal()) {
-			//ate o length as chaves tem o mesmo prefixo
-			//inserte chave a partir de length
-			
-			while(length < s.length()) {
-				//allocate new Node
-				TrieNode node = new TrieNode();
-				
-				//get character position at the alphabet
-				int index = s.charAt(length) - 94;
-				pt.setNode(index, node);
-				
-				//Skip to the next node
-				pt = pt.getNodeAt(index);
-				length++;
-			}
-			
-			//Set last node as terminal
-			pt.setTerminalInfo(true);
-			
+
+
+		//insert key from length to end of string
+		while(length < s.length()) {
+			//allocate new Node
+			TrieNode node = new TrieNode();
+
+			//get character position at the alphabet
+			int index = s.charAt(length) - 94;
+			pt.setNode(index, node);
+
+			//Skip to the next node
+			pt = pt.getNodeAt(index);
+			length++;
 		}
-		
+
+		//Set last node as terminal
+		pt.setTerminalInfo(true);
+
 	}
 
 	/**
@@ -95,7 +88,7 @@ public class Trie {
 		//Use auxiliary method
 		TrieNode pointer = root;
 		Pair<Integer, TrieNode> result = searchWord(s, pointer);
-		
+
 		pointer = result.getSecond();
 
 		//Check if the remaining pointer is end of word
@@ -104,7 +97,7 @@ public class Trie {
 
 		return false;
 	}
-	
+
 	/**
 	 * 
 	 * @param s
@@ -113,7 +106,7 @@ public class Trie {
 		//Use helper method
 		root = removeHelper(s, root, 0);
 	}
-	
+
 	/**
 	 * 
 	 * @param s
@@ -125,11 +118,11 @@ public class Trie {
 		//Base case 1 = null pt
 		if(pt == null)
 			return null;
-		
+
 		//Base case 2: key is prefix to another key
 		if(l == s.length() && pt.isTerminal() )
 			pt.setTerminalInfo(false);
-		
+
 		if(l < s.length() ) {
 			//Recursive calls
 			int index = s.charAt(l) - 94;
@@ -139,11 +132,11 @@ public class Trie {
 		//if pt is terminal
 		if(pt.isTerminal())
 			return pt;
-		
+
 		//check if pt is leaf
 		for(int i = 0; i < 26; i++)
 			if(pt.getNodeAt(i) != null) return pt;
-		
+
 		return null;
 	}
 
