@@ -37,8 +37,12 @@ public class TrieTest {
 		trie.remove("super");
 		result = trie.search("formidable");
 		assertEquals(true, result);
+		
 		result = trie.search("super");
 		assertEquals(false, result);
+		
+		result = trie.search("superhero");
+		assertEquals(true, result);
 		
 		
 	}
