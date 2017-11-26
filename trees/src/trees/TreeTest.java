@@ -72,6 +72,26 @@ public class TreeTest {
 		assertEquals(null, node.getLeft());
 		assertEquals(null, node.getRight());
 		assertEquals(1, node.getHeight());
+		
+		f[0] = 0;
+		node = bst.getPredecessor( bst.search(50, f) );
+		assertEquals( 40, node.getKey());
+		
+		f[0] = 0;
+		node = bst.getSucessor( bst.search(50, f) );
+		assertEquals( 65, node.getKey());
+		
+		f[0] = 0;
+		node = bst.search(30, f);
+		assertEquals(1, f[0]);
+		
+		f[0] = 0;
+		bst.remove(30);
+		
+		f[0] = 0;
+		node = bst.search(30, f);
+		System.out.println(node.getKey());
+		assertNotEquals(1, f[0]);
 	}
 	
 	@Test

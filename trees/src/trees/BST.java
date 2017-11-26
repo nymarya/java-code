@@ -121,6 +121,76 @@ public class BST {
 		
 		return rt;
 	}
+	
+	
+	/**
+	 * 
+	 * @param pt
+	 */
+	public void remove(int key) {
+		
+		//search tree
+		int f = 0;
+		//Node node = search(pt.getKey(), f);
+		Node pt = root;
+		Node parent = null;
+		int n = 0;
+		
+		while(f == 0) {
+			//if key was found
+			if( pt.getKey() == key ) {
+				f = 1;
+			} else if( pt.getKey() > key ) {	
+				//key wasn't found, look at left subtree
+
+				if( pt.getLeft() != null) {
+					n = 1;
+					parent = pt;
+					pt = pt.getLeft();
+				}
+				else 
+					f = 2;
+			} else {
+				//look at right subtree
+				
+				if(pt.getRight() != null) {
+					n = 2;
+					parent = pt;
+					pt = pt.getRight();
+				}
+					
+				else
+					f = 3;
+			}
+		}
+		
+		//if f = 1, remove the node
+		if ( f == 1) {
+			
+			//case 1: node is leaf
+			if( pt.getRight() == null && pt.getLeft() == null) {
+				//just delete it
+				
+				//n == 1 => node deleted is left child
+				//n == 2 => node deleted is right child
+				if( n == 1) 
+					parent.setLeft(null);
+				else if(n == 2) 
+					parent.setRight(null);
+
+				//pt = null;
+			} else if( pt.getRight() == null || pt.getLeft() == null ) {
+				//if one of them is null, parent points to this node
+				if( pt.getRight() != null)
+					pt = pt.getRight();
+				else
+					pt = pt.getLeft();
+			} else {
+				
+			}
+		}
+	}
+
 
 	/**
 	 * @return the root
@@ -208,6 +278,98 @@ public class BST {
 		
 		int height = (altL > altR) ? altL : altR;
 		node.setHeight(height);
+	}
+	
+	/**
+	 * Get  key right before rt
+	 * @param rt
+	 * @return
+	 */
+	public Node getPredecessor(Node rt) {
+		int f = 0;
+		Node pt = root ;
+
+		Stack<Node> ancestrals = new Stack<Node>();
+
+		while (pt != null)
+		{
+			ancestrals.push(pt);
+			if (pt.getKey() == rt.getKey() )
+				break;
+			else if (rt.getKey() < pt.getKey())
+				pt = pt.getLeft();
+			else
+				pt = pt.getRight();
+		}
+
+		//if left subtree is not empty, get max value
+		if (pt.getLeft() != null)
+		{
+			Node current = pt.getLeft();
+			while (current.getRight() != null)
+			{
+				current = current.getRight();
+			}
+
+			return current;
+		}
+		
+		//if left subtree is empty, search at parents
+		while (!ancestrals.empty())
+		{
+			Node parent = ancestrals.pop();
+			
+			if (parent.getKey() < rt.getKey())
+				return parent;
+		}
+
+		return pt;
+	}
+	
+	/**
+	 * 
+	 * @param rt
+	 * @return
+	 */
+	public Node getSucessor(Node rt) {
+		int f = 0;
+		Node pt = root ;
+
+		Stack<Node> ancestrals = new Stack<Node>();
+
+		while (pt != null)
+		{
+			ancestrals.push(pt);
+			if (pt.getKey() == rt.getKey() )
+				break;
+			else if (rt.getKey() < pt.getKey())
+				pt = pt.getLeft();
+			else
+				pt = pt.getRight();
+		}
+
+		//if right subtree is not empty, get min value
+		if (pt.getRight() != null)
+		{
+			Node current = pt.getRight();
+			while (current.getLeft() != null)
+			{
+				current = current.getLeft();
+			}
+
+			return current;
+		}
+		//if right subtree is empty, search at parents
+		while (!ancestrals.empty())
+		{
+			Node parent = ancestrals.pop();
+			
+			if (parent.getKey() > rt.getKey())
+				return parent;
+		}
+
+		return pt;
+		
 	}
 	
 }
