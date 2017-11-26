@@ -181,10 +181,23 @@ public class BST {
 				//pt = null;
 			} else if( pt.getRight() == null || pt.getLeft() == null ) {
 				//if one of them is null, parent points to this node
-				if( pt.getRight() != null)
-					pt = pt.getRight();
-				else
-					pt = pt.getLeft();
+				if( pt.getRight() != null) {
+					
+					Node node = pt.getRight();
+					
+					if( parent.getKey() > pt.getKey())
+						parent.setLeft(node);
+					else
+						parent.setRight(node);
+				}
+				else {
+					Node node = pt.getLeft();
+					
+					if( parent.getKey() > pt.getKey())
+						parent.setLeft(node);
+					else
+						parent.setRight(node);
+				}
 			} else {
 				
 			}
