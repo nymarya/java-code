@@ -199,7 +199,16 @@ public class BST {
 						parent.setRight(node);
 				}
 			} else {
+				//choose a node to swap and remove leaf
+				Node node = getMin(pt);
 				
+				//swap
+				node.setRight(pt.getRight());
+				
+				if( parent.getKey() > pt.getKey())
+					parent.setLeft(node);
+				else
+					parent.setRight(node);
 			}
 		}
 	}
@@ -319,12 +328,8 @@ public class BST {
 		if (pt.getLeft() != null)
 		{
 			Node current = pt.getLeft();
-			while (current.getRight() != null)
-			{
-				current = current.getRight();
-			}
 
-			return current;
+			return getMax(current);
 		}
 		
 		//if left subtree is empty, search at parents
@@ -365,12 +370,8 @@ public class BST {
 		if (pt.getRight() != null)
 		{
 			Node current = pt.getRight();
-			while (current.getLeft() != null)
-			{
-				current = current.getLeft();
-			}
 
-			return current;
+			return getMin(current);
 		}
 		//if right subtree is empty, search at parents
 		while (!ancestrals.empty())
@@ -383,6 +384,40 @@ public class BST {
 
 		return pt;
 		
+	}
+	
+	/**
+	 * Return min key after node
+	 * @param pt
+	 * @return
+	 */
+	public Node getMin(Node pt) {
+		
+		Node current = pt.getLeft();
+		while (current.getLeft() != null)
+		{
+			current = current.getLeft();
+		}
+
+		return current;
+
+	}
+	
+	/**
+	 * Return max key after node
+	 * @param pt
+	 * @return
+	 */
+	public Node getMax(Node pt) {
+		
+		Node current = pt.getRight();
+		while (current.getRight() != null)
+		{
+			current = current.getRight();
+		}
+
+		return current;
+
 	}
 	
 }

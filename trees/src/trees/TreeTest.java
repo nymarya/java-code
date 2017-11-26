@@ -86,17 +86,28 @@ public class TreeTest {
 		assertEquals(1, f[0]);
 		
 		//test removing leaf node
-		bst.remove(30);
+		bst.remove(40);
 		
 		f[0] = 0;
-		node = bst.search(30, f);
+		node = bst.search(40, f);
 		assertNotEquals(1, f[0]);
 		
 		//test removing node with only one child
-		bst.remove(90);
+		bst.remove(35);
 		
 		f[0] = 0;
-		node = bst.search(90, f);
+		node = bst.search(35, f);
+		assertNotEquals(1, f[0]);
+		
+		f[0] = 0;
+		node = bst.search(25, f);
+		assertEquals(1, f[0]);
+		
+		//test removing node with both children
+		bst.remove(70);
+		
+		f[0] = 0;
+		node = bst.search(70, f);
 		assertNotEquals(1, f[0]);
 		
 		f[0] = 0;
